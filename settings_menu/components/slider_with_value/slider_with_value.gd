@@ -28,7 +28,7 @@ var slider_value: float :
 	get: return %HSlider.value
 	set(_value): %HSlider.value = _value
 
-func _get_configuration_warnings(): # Creates editor warnings 
+func _get_configuration_warnings() -> PackedStringArray: # Creates editor warnings 
 	var msgs: PackedStringArray
 	if (slider_value_changed.has_connections() != true && drag_ended.has_connections() != true):
 		msgs.append("This component has no connections to any of its signals!")

@@ -8,8 +8,8 @@ class_name ToggleableLabel
 		toggle_label(value)
 		enabled = value
 
-@export var font_color = Color.WHITE
-@export var greyed_out_color = Color.DIM_GRAY
+@export var font_color: Color = Color.WHITE
+@export var greyed_out_color: Color = Color.DIM_GRAY
 
 func toggle_label(state: bool) -> void:
 	if state:
