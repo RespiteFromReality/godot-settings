@@ -1,0 +1,88 @@
+[gd_scene load_steps=3 format=3 uid="uid://7sm7mretevd4"]
+
+[ext_resource type="Script" uid="uid://skps5dcd8dbf" path="res://settings_menu/components/upscaling.gd" id="1_3hc7b"]
+[ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="1_tgnp2"]
+
+[node name="Upscaling" type="GridContainer"]
+editor_description = "Allows Downsampling and Supersampling, as well as toggling and configuration of FSR 2 upscaling.
+
+Be aware that both Billinear and FSR use the same render_scale value. However while Bilinear supports any scaling between 0.0 and 2.0, FSR only supports values below 1.0. In FSR this value is also set with AMD's quality toggle instead.
+
+Be aware that FSR sharpness is inverted in engine compared what a user may expect, 0 is sharpest, 2 is least sharp. The UI intentionally uses 0-2 and inverts the value when sending to the engine."
+columns = 2
+script = ExtResource("1_3hc7b")
+
+[node name="UpscalingLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Upscaling"
+
+[node name="Upscaling" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 16
+selected = 0
+item_count = 2
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "FSR (2.2)"
+popup/item_1/id = 1
+
+[node name="RenderScaleLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Render Scale"
+
+[node name="RenderScaleSlider" parent="." instance=ExtResource("1_tgnp2")]
+layout_mode = 2
+slider_range_min = 0.25
+slider_range_max = 2.0
+slider_starting_value = 1.0
+slider_steps = 0.25
+decimals_padding = 2
+unit = "x"
+
+[node name="FSRQualityLabel" type="Label" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "FSR Quality"
+
+[node name="FSRQualityDropdown" type="OptionButton" parent="."]
+visible = false
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+selected = 0
+item_count = 5
+popup/item_0/text = "Native"
+popup/item_0/id = 0
+popup/item_1/text = "Ultra Quality"
+popup/item_1/id = 1
+popup/item_2/text = "Quality"
+popup/item_2/id = 2
+popup/item_3/text = "Balanced"
+popup/item_3/id = 3
+popup/item_4/text = "Performance"
+popup/item_4/id = 4
+
+[node name="FSRSharpnessLabel" type="Label" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "FSR Sharpness"
+
+[node name="FSRSharpnessSlider" parent="." instance=ExtResource("1_tgnp2")]
+visible = false
+layout_mode = 2
+slider_range_max = 2.0
+slider_starting_value = 0.2
+slider_steps = 0.1
+decimals_padding = 1
+
+[connection signal="item_selected" from="Upscaling" to="." method="_on_upscaling_item_selected"]
+[connection signal="slider_value_changed" from="RenderScaleSlider" to="." method="_on_render_scale_slider_slider_value_changed"]
+[connection signal="item_selected" from="FSRQualityDropdown" to="." method="_on_fsr_quality_dropdown_item_selected"]
+[connection signal="slider_value_changed" from="FSRSharpnessSlider" to="." method="_on_fsr_sharpness_slider_slider_value_changed"]

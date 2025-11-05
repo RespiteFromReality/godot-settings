@@ -9,17 +9,33 @@ func _ready() -> void:
 
 ## Loads user settings from config file.
 func load_settings() -> void:
+	# WINDOW MODE
 	var window_mode: DisplayServer.WindowMode = SettingsFiles.get_setting("display", "window_mode")
 	display_set_window_mode(window_mode)
 	
+	# VSYNC
 	var vsync_mode: DisplayServer.VSyncMode =  SettingsFiles.get_setting("display", "vsync_mode")
 	display_set_vsync_mode(vsync_mode)
 	
+	# FPS LIMIT
 	var max_fps: int = SettingsFiles.get_setting("display", "max_fps")
 	display_set_max_fps(max_fps)
+	
+	# ANTI-ALIASING
 	var anti_aliasing: ANTI_ALIASING = SettingsFiles.get_setting("display", "anti_aliasing")
 	display_set_antialiasing(anti_aliasing)
-
+	
+	# UPSCALER
+	var upscaler: int = SettingsFiles.get_setting("display", "upscaler")
+	display_set_upscaler(upscaler)
+	var render_scale: float = SettingsFiles.get_setting('display', "render_scale")
+	display_set_render_scale(render_scale)
+	
+	# FSR
+	var sharpness: float = SettingsFiles.get_setting("display", "fsr_sharpness")
+	var quality: float = SettingsFiles.get_setting("display", "fsr_quality")
+	display_set_fsr_sharpness(sharpness)
+	display_set_fsr_quality(quality)
 
 # WINDOW MODE
 func display_get_window_mode() -> int:
@@ -109,3 +125,59 @@ func display_set_msaa_quality(index: int) -> void:
 		2:
 			viewport.msaa_3d = Viewport.MSAA_8X
 			SettingsFiles.apply_setting("display", "msaa_quality", 8)
+
+
+# UPSCALING
+func display_get_upscaler() -> Viewport.Scaling3DMode:
+	var upscaler: Viewport.Scaling3DMode = SettingsFiles.get_setting("display", "upscaler")
+	return upscaler
+
+
+func display_set_upscaler(mode: Viewport.Scaling3DMode) -> void:
+	var viewport: Viewport = get_viewport()
+	match mode:
+		Viewport.SCALING_3D_MODE_BILINEAR:
+			viewport.scaling_3d_mode = mode
+		Viewport.SCALING_3D_MODE_FSR2:
+			viewport.scaling_3d_mode = mode
+			var quality: float = display_get_fsr_quality()
+			var sharpness: float = display_get_fsr_sharpness()
+			viewport.scaling_3d_scale = quality
+			viewport.fsr_sharpness = sharpness
+	SettingsFiles.apply_setting("display", "upscaler", mode)
+
+
+# FSR
+func display_get_fsr_quality() -> float:
+	var quality: float = SettingsFiles.get_setting("display", "fsr_quality")
+	return quality
+
+
+func display_set_fsr_quality(quality: float) -> void:
+	var viewport: Viewport = get_viewport()
+	viewport.scaling_3d_scale = quality
+	SettingsFiles.apply_setting("display", "fsr_quality", quality)
+
+
+func display_get_fsr_sharpness() -> float:
+	var sharpness: float = SettingsFiles.get_setting("display", "fsr_sharpness")
+	return sharpness
+
+
+## FSR Sharpness is a range of 0.0 to 2.0, with 0.0 being sharpest, 2.0 being least sharp.
+func display_set_fsr_sharpness(sharpness: float) -> void:
+	var viewport: Viewport = get_viewport()
+	viewport.fsr_sharpness = sharpness
+	SettingsFiles.apply_setting("display", "fsr_sharpness", sharpness)
+
+
+# RENDER SCALE
+func display_get_render_scale() -> float:
+	var scale: float = SettingsFiles.get_setting("display", "render_scale")
+	return scale
+
+
+func display_set_render_scale(scale: float) -> void:
+	var viewport: Viewport = get_viewport()
+	viewport.scaling_3d_scale = scale
+	SettingsFiles.apply_setting("display", "render_scale", scale)

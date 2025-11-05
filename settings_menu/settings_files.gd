@@ -36,6 +36,11 @@ func create_defaults() -> void:
 	
 	new_config.set_value("display", "anti_aliasing", Settings.ANTI_ALIASING.DISABLED)
 	new_config.set_value("display", "msaa_quality", 4)
+
+	new_config.set_value("display", "upscaler", Viewport.SCALING_3D_MODE_BILINEAR)
+	new_config.set_value("display", "render_scale", 1.0)
+	new_config.set_value("display", "fsr_quality", 0.67)
+	new_config.set_value("display", "fsr_sharpness", 1.7)
 	
 	new_config.save(DEFAULT_SETTINGS_FILE_PATH)
 
