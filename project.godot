@@ -17,6 +17,11 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/show_image=false
 config/icon="uid://c54lq1y7tl7ts"
 
+[autoload]
+
+SettingsFiles="*res://settings_menu/settings_files.gd"
+Settings="*res://settings_menu/settings.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=1

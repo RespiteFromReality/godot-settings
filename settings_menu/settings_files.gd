@@ -1,0 +1,63 @@
+extends Node
+
+const SETTINGS_FILE_PATH = "user://settings.ini"
+const DEFAULT_SETTINGS_FILE_PATH = "user://settings_default.ini"
+
+var user_config: ConfigFile
+
+
+func _init() -> void:
+	user_config = ConfigFile.new()
+
+	# Create default settings file if first launch or they have been deleted.
+	if FileAccess.file_exists(DEFAULT_SETTINGS_FILE_PATH) == false:
+		create_defaults()
+
+	# Load user settings if they exist, otherwise clone default settings and create a `settings.ini`.
+	if FileAccess.file_exists(SETTINGS_FILE_PATH) == true:
+		var err: Error = user_config.load(SETTINGS_FILE_PATH)
+		if err != OK:
+			printerr("Loading settings failed with: ", err)
+	else:
+		user_config.load(DEFAULT_SETTINGS_FILE_PATH)
+		user_config.save(SETTINGS_FILE_PATH)
+
+## File Functions
+## Generates a ini file with default settings.
+func create_defaults() -> void:
+	var new_config := ConfigFile.new()
+
+	new_config.set_value("config", "version", 1.0)
+	
+	new_config.save(DEFAULT_SETTINGS_FILE_PATH)
+
+func apply_setting(section: String, key: String, value: Variant) -> void:
+	user_config.set_value(section, key, value)
+	user_config.save(SETTINGS_FILE_PATH)
+
+
+func get_setting(section: String, key: String) -> Variant:
+	if user_config.has_section(section):
+		var value: Variant = user_config.get_value(section, key)
+		return value
+	else:
+		return -1
+
+
+func save_settings() -> Error:
+	var err: Error = user_config.save(SETTINGS_FILE_PATH)
+	if err != OK:
+		printerr("Saving settings failed with: ", err)
+
+	return err
+
+# Creates or loads `default_settings.ini` and overrides `settings.ini` with default values.
+func restore_default_settings() -> void:
+	var default_config := ConfigFile.new()
+
+	# Load default_settings.ini or create it if it missing.
+	if FileAccess.file_exists(DEFAULT_SETTINGS_FILE_PATH) == false:
+		create_defaults()
+
+	default_config.load(DEFAULT_SETTINGS_FILE_PATH)
+	default_config.save(SETTINGS_FILE_PATH)
