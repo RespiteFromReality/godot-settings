@@ -22,6 +22,7 @@ func _init() -> void:
 		user_config.load(DEFAULT_SETTINGS_FILE_PATH)
 		user_config.save(SETTINGS_FILE_PATH)
 
+
 ## File Functions
 ## Generates a ini file with default settings.
 func create_defaults() -> void:
@@ -29,7 +30,10 @@ func create_defaults() -> void:
 
 	new_config.set_value("config", "version", 1.0)
 	
+	new_config.set_value("display", "window_mode", DisplayServer.WINDOW_MODE_WINDOWED)
+	
 	new_config.save(DEFAULT_SETTINGS_FILE_PATH)
+
 
 func apply_setting(section: String, key: String, value: Variant) -> void:
 	user_config.set_value(section, key, value)
@@ -50,6 +54,8 @@ func save_settings() -> Error:
 		printerr("Saving settings failed with: ", err)
 
 	return err
+
+
 
 # Creates or loads `default_settings.ini` and overrides `settings.ini` with default values.
 func restore_default_settings() -> void:
