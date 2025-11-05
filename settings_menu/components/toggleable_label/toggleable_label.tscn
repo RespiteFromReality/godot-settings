@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b84mscbbnev3j"]
+
+[ext_resource type="Script" uid="uid://d270vtwfidiph" path="res://settings_menu/components/toggleable_label/toggleable_label.gd" id="1_wm432"]
+
+[node name="ToggleableLabel" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Label"
+script = ExtResource("1_wm432")
+greyed_out_color = Color(0.62152386, 0.62152386, 0.6215238, 1)

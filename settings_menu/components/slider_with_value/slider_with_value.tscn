@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://pva2tkjpsaxa"]
+
+[ext_resource type="Script" uid="uid://b8fdv7pwbjrdy" path="res://settings_menu/components/slider_with_value/slider_with_value.gd" id="1_5ff6h"]
+[ext_resource type="Script" uid="uid://d270vtwfidiph" path="res://settings_menu/components/toggleable_label/toggleable_label.gd" id="3_tsqw7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ba8ne"]
+bg_color = Color(0.37830356, 0.39208335, 0.39896816, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8ild"]
+bg_color = Color(0.57700837, 0.5770084, 0.57700837, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[node name="SliderWithValue" type="Control"]
+custom_minimum_size = Vector2(380, 20)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 380.0
+offset_bottom = 20.0
+size_flags_horizontal = 10
+script = ExtResource("1_5ff6h")
+slider_range_max = 100.0
+slider_starting_value = 100.0
+slider_steps = 1.0
+
+[node name="HSlider" type="HSlider" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 306.0
+offset_bottom = 18.0
+pivot_offset = Vector2(134, 8)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/grabber_offset = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_ba8ne")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_f8ild")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_f8ild")
+value = 100.0
+scrollable = false
+ticks_position = 3
+
+[node name="SliderValueLabel" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 10)
+layout_mode = 0
+offset_left = 305.0
+offset_top = -1.0
+offset_right = 380.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("3_tsqw7")
+greyed_out_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+metadata/_custom_type_script = "uid://d270vtwfidiph"
+
+[node name="SliderSoundEffect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+pitch_scale = 0.99
+
+[connection signal="drag_ended" from="HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
