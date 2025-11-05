@@ -34,6 +34,9 @@ func create_defaults() -> void:
 	new_config.set_value("display", "vsync_mode", DisplayServer.VSYNC_DISABLED)
 	new_config.set_value("display", "max_fps", 0)
 	
+	new_config.set_value("display", "anti_aliasing", Settings.ANTI_ALIASING.DISABLED)
+	new_config.set_value("display", "msaa_quality", 4)
+	
 	new_config.save(DEFAULT_SETTINGS_FILE_PATH)
 
 

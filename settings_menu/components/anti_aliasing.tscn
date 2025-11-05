@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://df1ws3gkkbapr"]
+
+[ext_resource type="Script" uid="uid://c6832edpwlj5t" path="res://settings_menu/components/anti_aliasing.gd" id="1_kug44"]
+[ext_resource type="Texture2D" uid="uid://bmx4wa4da4alv" path="res://settings_menu/assets/NodeWarning.svg" id="2_44im6"]
+
+[node name="AntiAliasing" type="GridContainer"]
+editor_description = "Allows selecting Anti-Aliasing options.
+Options: Disabled, FXAA, SMAA, MSAA, TAA
+
+Be aware that when FSR is on TAA is also always on.
+
+Be aware that MSAA 2x currently has artifacts on Vulkan with AMD. See issue !97750."
+custom_minimum_size = Vector2(540, 0)
+theme_override_constants/v_separation = 8
+columns = 2
+script = ExtResource("1_kug44")
+metadata/_edit_use_anchors_ = true
+
+[node name="AALabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Anti-aliasing"
+
+[node name="AAOptionButton" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 16
+selected = 0
+item_count = 5
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "FXAA"
+popup/item_1/id = 1
+popup/item_2/text = "MSAA"
+popup/item_2/id = 2
+popup/item_3/text = "SMAA"
+popup/item_3/id = 3
+popup/item_4/text = "TAA"
+popup/item_4/id = 4
+
+[node name="MSAAQualityLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "MSAA Quality"
+
+[node name="MSAAQualityOptions" type="OptionButton" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 16
+selected = 0
+item_count = 3
+popup/item_0/text = "2x"
+popup/item_0/icon = ExtResource("2_44im6")
+popup/item_0/id = 0
+popup/item_1/text = "4x"
+popup/item_1/id = 1
+popup/item_2/text = "8x"
+popup/item_2/id = 2
+
+[connection signal="item_selected" from="AAOptionButton" to="." method="_on_aa_option_button_item_selected"]
+[connection signal="item_selected" from="MSAAQualityOptions" to="." method="_on_msaa_quality_options_item_selected"]
