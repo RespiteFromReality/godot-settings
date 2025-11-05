@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxguaf5yxtpk5"]
+
+[ext_resource type="Script" uid="uid://ctkra6qy5jlaf" path="res://settings_menu/components/vsync_and_fps_limiter.gd" id="1_12ib5"]
+[ext_resource type="Script" uid="uid://d270vtwfidiph" path="res://settings_menu/components/toggleable_label/toggleable_label.gd" id="2_73anq"]
+[ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="3_m228b"]
+
+[node name="VSyncAndFPSLimit" type="GridContainer"]
+editor_description = "Allows toggling of Vsync and settings a FPS limit.
+
+Vsync Options: Disabled, Enabled, Adaptive. 
+Limiter Options: Between 15-240FPS.
+
+Be aware that when vsync is set to any mode other than Disabled, the engine will ignore any fps limit set, using either the monitor refresh rate or not limiting fps at all."
+theme_override_constants/v_separation = 8
+columns = 2
+script = ExtResource("1_12ib5")
+
+[node name="VSyncLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "V-Sync"
+
+[node name="VSync" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 16
+selected = 0
+item_count = 3
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+popup/item_2/text = "Adaptive"
+popup/item_2/id = 2
+
+[node name="FPSLimitToggleableLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "FPS Limit"
+script = ExtResource("2_73anq")
+greyed_out_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+metadata/_custom_type_script = "uid://d270vtwfidiph"
+
+[node name="FPSLimit" parent="." instance=ExtResource("3_m228b")]
+layout_mode = 2
+slider_range_min = 15.0
+slider_range_max = 240.0
+slider_starting_value = 0.0
+zero_means_disabled = true
+
+[connection signal="item_selected" from="VSync" to="." method="_on_vsync_item_selected"]
+[connection signal="drag_ended" from="FPSLimit" to="." method="_on_fps_limit_drag_ended"]
