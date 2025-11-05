@@ -10,6 +10,13 @@ config_version=5
 
 [application]
 
-config/name="settings"
+config/name="Godot Settings"
+config/description="Godot 3D game settings demo."
+config/version="0.1.0"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="uid://c54lq1y7tl7ts"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
