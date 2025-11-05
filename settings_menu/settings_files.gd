@@ -42,6 +42,10 @@ func create_defaults() -> void:
 	new_config.set_value("display", "fsr_quality", 0.67)
 	new_config.set_value("display", "fsr_sharpness", 1.7)
 	
+	new_config.set_value("display", "brightness", 1.0)
+	new_config.set_value("display", "contrast", 1.0)
+	new_config.set_value("display", "saturation", 1.0)
+	
 	new_config.save(DEFAULT_SETTINGS_FILE_PATH)
 
 

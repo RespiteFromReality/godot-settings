@@ -36,6 +36,17 @@ func load_settings() -> void:
 	var quality: float = SettingsFiles.get_setting("display", "fsr_quality")
 	display_set_fsr_sharpness(sharpness)
 	display_set_fsr_quality(quality)
+	
+	# ADJUSTMENTS
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.adjustment_enabled = true
+		var brightness: float = SettingsFiles.get_setting("display", "brightness")
+		var contrast: float = SettingsFiles.get_setting("display", "contrast")
+		var saturation: float = SettingsFiles.get_setting("display", "saturation")
+		display_set_brightness(brightness)
+		display_set_contrast(contrast)
+		display_set_saturation(saturation)
 
 # WINDOW MODE
 func display_get_window_mode() -> int:
@@ -181,3 +192,41 @@ func display_set_render_scale(scale: float) -> void:
 	var viewport: Viewport = get_viewport()
 	viewport.scaling_3d_scale = scale
 	SettingsFiles.apply_setting("display", "render_scale", scale)
+
+# ADJUSTMENTS
+
+# BRIGHTNESS
+func display_get_brightness() -> float:
+	var brightness: float = SettingsFiles.get_setting("display", "brightness")
+	return brightness
+
+func display_set_brightness(brightness: float) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.set_adjustment_brightness(brightness)
+	SettingsFiles.apply_setting("display", "brightness", brightness)
+
+
+# CONTRAST
+func display_get_contrast() -> float:
+	var contrast: float = SettingsFiles.get_setting("display", "contrast")
+	return contrast
+
+func display_set_contrast(contrast: float) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.set_adjustment_contrast(contrast)
+	SettingsFiles.apply_setting("display", "contrast", contrast)
+
+
+# SATURATION
+func display_get_saturation() -> float:
+	var saturation: float = SettingsFiles.get_setting("display", "saturation")
+	return saturation
+
+func display_set_saturation(saturation: float) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.set_adjustment_saturation(saturation)
+	SettingsFiles.apply_setting("display", "saturation", saturation)
+

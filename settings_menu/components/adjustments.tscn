@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://r3boq43ae4w"]
+
+[ext_resource type="Script" uid="uid://l8vm2hnqotf0" path="res://settings_menu/components/adjustments.gd" id="1_5pcpq"]
+[ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="1_jjtvj"]
+
+[node name="Adjustments" type="GridContainer"]
+editor_description = "Allows adjusting Brightness, Contrast and Saturation."
+theme_override_constants/v_separation = 8
+columns = 2
+script = ExtResource("1_5pcpq")
+
+[node name="BrightnessLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Brightness"
+
+[node name="Brightness" parent="." instance=ExtResource("1_jjtvj")]
+layout_mode = 2
+slider_range_min = 0.2
+slider_range_max = 1.8
+slider_starting_value = 1.0
+slider_steps = 0.05
+decimals_padding = 2
+
+[node name="ContrastLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Contrast"
+
+[node name="Contrast" parent="." instance=ExtResource("1_jjtvj")]
+layout_mode = 2
+slider_range_min = 0.2
+slider_range_max = 1.8
+slider_starting_value = 1.0
+slider_steps = 0.05
+decimals_padding = 2
+
+[node name="SaturationLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Saturation"
+
+[node name="Saturation" parent="." instance=ExtResource("1_jjtvj")]
+layout_mode = 2
+slider_range_max = 2.0
+slider_starting_value = 1.0
+slider_steps = 0.05
+decimals_padding = 2
+
+[connection signal="slider_value_changed" from="Brightness" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="slider_value_changed" from="Contrast" to="." method="_on_contrast_slider_value_changed"]
+[connection signal="slider_value_changed" from="Saturation" to="." method="_on_saturation_slider_value_changed"]
