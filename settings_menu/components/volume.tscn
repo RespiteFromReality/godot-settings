@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://4ey10g4dv4lq"]
+
+[ext_resource type="Script" uid="uid://dakoiv53g0jx" path="res://settings_menu/components/volume.gd" id="1_ij7rm"]
+[ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="1_n0dvm"]
+
+[node name="VolumeControls" type="GridContainer"]
+columns = 2
+script = ExtResource("1_ij7rm")
+
+[node name="MasterVolumeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Master"
+
+[node name="MasterVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+layout_mode = 2
+unit = "%"
+
+[node name="MusicVolumeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Music"
+
+[node name="MusicVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+layout_mode = 2
+unit = "%"
+
+[node name="EffectsVolumeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Effects"
+
+[node name="EffectsVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+layout_mode = 2
+unit = "%"
+
+[node name="AmbientVolumeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Ambient"
+
+[node name="AmbientVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+layout_mode = 2
+unit = "%"
+
+[node name="VoiceVolumeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Voice"
+
+[node name="VoiceVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+layout_mode = 2
+unit = "%"
+
+[node name="UIVolumeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "UI"
+
+[node name="UIVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+layout_mode = 2
+unit = "%"
+
+[connection signal="slider_value_changed" from="MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="slider_value_changed" from="MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="slider_value_changed" from="EffectsVolumeSlider" to="." method="_on_effects_volume_slider_value_changed"]
+[connection signal="slider_value_changed" from="AmbientVolumeSlider" to="." method="_on_ambient_volume_slider_value_changed"]
+[connection signal="slider_value_changed" from="VoiceVolumeSlider" to="." method="_on_voice_volume_slider_value_changed"]
+[connection signal="slider_value_changed" from="UIVolumeSlider" to="." method="_on_ui_volume_slider_value_changed"]

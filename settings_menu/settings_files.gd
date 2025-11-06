@@ -48,6 +48,13 @@ func create_defaults() -> void:
 	new_config.set_value("display", "contrast", 1.0)
 	new_config.set_value("display", "saturation", 1.0)
 	
+	new_config.set_value("audio", "master_volume", 1.0)
+	new_config.set_value("audio", "music_volume", 1.0)
+	new_config.set_value("audio", "effects_volume", 1.0)
+	new_config.set_value("audio", "ambient_volume", 1.0)
+	new_config.set_value("audio", "voice_volume", 1.0)
+	new_config.set_value("audio", "ui_volume", 1.0)
+	
 	new_config.save(DEFAULT_SETTINGS_FILE_PATH)
 
 

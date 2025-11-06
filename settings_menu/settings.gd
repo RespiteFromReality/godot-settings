@@ -249,3 +249,40 @@ func display_set_saturation(saturation: float) -> void:
 	if environment != null:
 		environment.set_adjustment_saturation(saturation)
 	SettingsFiles.apply_setting("display", "saturation", saturation)
+	
+
+## Audio
+func audio_get_volume(bus_index: int) -> float:
+	match bus_index:
+		0:
+			return SettingsFiles.get_setting("audio", "master_volume")
+		1:
+			return SettingsFiles.get_setting("audio", "music_volume")
+		2:
+			return SettingsFiles.get_setting("audio", "effects_volume")
+		3:
+			return SettingsFiles.get_setting("audio", "ambient_volume")
+		4:
+			return SettingsFiles.get_setting("audio", "voice_volume")
+		5:
+			return SettingsFiles.get_setting("audio", "ui_volume")
+	assert(false) # Unreachable
+	return 1.0
+
+
+func audio_set_volume(index: int, volume: float) -> void:
+	var adjusted_volume: float = volume
+	AudioServer.set_bus_volume_linear(index, adjusted_volume)
+	match index:
+		0:
+			SettingsFiles.apply_setting("audio", "master_volume", adjusted_volume)
+		1:
+			SettingsFiles.apply_setting("audio", "music_volume", adjusted_volume)
+		2:
+			SettingsFiles.apply_setting("audio", "effects_volume", adjusted_volume)
+		3:
+			SettingsFiles.apply_setting("audio", "ambient_volume", adjusted_volume)
+		4:
+			SettingsFiles.apply_setting("audio", "voice_volume", adjusted_volume)
+		5:
+			SettingsFiles.apply_setting("audio", "ui_volume", adjusted_volume)
