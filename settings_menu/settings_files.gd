@@ -30,6 +30,8 @@ func create_defaults() -> void:
 
 	new_config.set_value("config", "version", 1.0)
 	
+	new_config.set_value("game", "fov", 90)
+	
 	new_config.set_value("display", "window_mode", DisplayServer.WINDOW_MODE_WINDOWED)
 	new_config.set_value("display", "vsync_mode", DisplayServer.VSYNC_DISABLED)
 	new_config.set_value("display", "max_fps", 0)

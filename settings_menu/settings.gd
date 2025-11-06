@@ -9,6 +9,12 @@ func _ready() -> void:
 
 ## Loads user settings from config file.
 func load_settings() -> void:
+	## GAME
+	#FOV
+	var fov: float = SettingsFiles.get_setting("game", "fov")
+	game_set_fov(fov)
+	
+	## DISPLAY
 	# WINDOW MODE
 	var window_mode: DisplayServer.WindowMode = SettingsFiles.get_setting("display", "window_mode")
 	display_set_window_mode(window_mode)
@@ -47,6 +53,20 @@ func load_settings() -> void:
 		display_set_brightness(brightness)
 		display_set_contrast(contrast)
 		display_set_saturation(saturation)
+
+
+# FOV
+func game_get_fov() -> float:
+	var fov: float = SettingsFiles.get_setting("game", "fov")
+	return fov
+
+
+func game_set_fov(fov: float) -> void:
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	if camera != null:
+		camera.fov = fov
+	SettingsFiles.apply_setting("game", "fov", fov)
+
 
 # WINDOW MODE
 func display_get_window_mode() -> int:
@@ -229,4 +249,3 @@ func display_set_saturation(saturation: float) -> void:
 	if environment != null:
 		environment.set_adjustment_saturation(saturation)
 	SettingsFiles.apply_setting("display", "saturation", saturation)
-
