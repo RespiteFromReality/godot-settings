@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1r0rlh6kci32"]
+
+[ext_resource type="Script" uid="uid://sqwkycf4p0fb" path="res://settings_menu/components/lod_threshold.gd" id="1_laylt"]
+[ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="2_ujapk"]
+
+[node name="LODTreshhold" type="HBoxContainer"]
+editor_description = "Allows adjusting the threshold for automatic mesh LOD system.
+
+Threshold of 0.0 mean no LOD, increases cause LOD to transition sooner.
+Each viewport has its own mesh_lod_threshold. 
+
+Be aware that if meshes have automatic LOD disabled this value has no effect. 
+Additionally if using OBJ files they must be imported as Scenes to automatically generate LOD meshes.
+"
+offset_right = 499.0
+offset_bottom = 23.0
+script = ExtResource("1_laylt")
+
+[node name="LODTreshholdLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "LOD Threshold"
+
+[node name="LODThreshold" parent="." instance=ExtResource("2_ujapk")]
+layout_mode = 2
+slider_range_max = 32.0
+slider_starting_value = 2.0
+zero_means_disabled = true
+
+[connection signal="slider_value_changed" from="LODThreshold" to="." method="_on_lod_threshold_slider_value_changed"]

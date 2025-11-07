@@ -53,7 +53,12 @@ func load_settings() -> void:
 		display_set_brightness(brightness)
 		display_set_contrast(contrast)
 		display_set_saturation(saturation)
-
+	
+	## GRAPHICS
+	# LOD THRESHOLD
+	var threshold: float = SettingsFiles.get_setting("graphics", "lod_threshold")
+	graphics_set_lod_threshold(threshold)
+	
 
 # FOV
 func game_get_fov() -> float:
@@ -249,7 +254,17 @@ func display_set_saturation(saturation: float) -> void:
 	if environment != null:
 		environment.set_adjustment_saturation(saturation)
 	SettingsFiles.apply_setting("display", "saturation", saturation)
-	
+
+
+## Graphics
+func graphics_get_lod_threshold() -> float:
+	var threshold: float = SettingsFiles.get_setting("graphics", "lod_threshold")
+	return threshold
+
+func graphics_set_lod_threshold(threshold: float) -> void:
+	get_tree().root.mesh_lod_threshold = threshold
+	SettingsFiles.apply_setting("graphics", "lod_threshold", threshold)
+
 
 ## Audio
 func audio_get_volume(bus_index: int) -> float:
