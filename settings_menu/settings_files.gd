@@ -49,6 +49,8 @@ func create_defaults() -> void:
 	new_config.set_value("display", "saturation", 1.0)
 	
 	new_config.set_value("graphics", "lod_threshold", 2.0)
+	new_config.set_value("graphics", "ssil", true)
+	new_config.set_value("graphics", "ssil_quality", RenderingServer.ENV_SSIL_QUALITY_HIGH)
 	
 	new_config.set_value("audio", "master_volume", 1.0)
 	new_config.set_value("audio", "music_volume", 1.0)

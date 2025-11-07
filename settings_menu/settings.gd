@@ -266,6 +266,29 @@ func graphics_set_lod_threshold(threshold: float) -> void:
 	SettingsFiles.apply_setting("graphics", "lod_threshold", threshold)
 
 
+# SCREEN-SPACE INDIRECT LIGHTING
+func graphics_get_ssil() -> bool:
+	var ssil: bool = SettingsFiles.get_setting("graphics", "ssil")
+	return ssil
+
+func graphics_set_ssil(toggle: bool) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.ssil_enabled = toggle
+	SettingsFiles.apply_setting("graphics", "ssil", toggle)
+
+
+func graphics_get_ssil_quality() -> RenderingServer.EnvironmentSSILQuality:
+	var ssil_quality: RenderingServer.EnvironmentSSILQuality = SettingsFiles.get_setting("graphics", "ssil_quality")
+	return ssil_quality
+
+func graphics_set_ssil_quality(index: int) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		RenderingServer.environment_set_ssil_quality(index, true, 0.5, 4, 50, 300)
+	SettingsFiles.apply_setting("graphics", "ssil_quality", index)
+
+
 ## Audio
 func audio_get_volume(bus_index: int) -> float:
 	match bus_index:
