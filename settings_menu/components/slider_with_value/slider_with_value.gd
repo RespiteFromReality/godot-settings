@@ -15,6 +15,9 @@ signal drag_ended(value: float)
 @export var slider_starting_value: float
 @export var slider_steps: float
 @export var zero_means_disabled: bool
+@export var rounded: bool:
+	get(): return %HSlider.rounded
+	set(value): %HSlider.rounded = value
 @export_category("Label")
 @export var label_toggle: bool = true :
 	get(): return %SliderValueLabel.enabled

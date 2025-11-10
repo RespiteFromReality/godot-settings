@@ -289,6 +289,31 @@ func graphics_set_ssil_quality(index: int) -> void:
 	SettingsFiles.apply_setting("graphics", "ssil_quality", index)
 
 
+# SCREEN-SPACE REFLECTIONS
+func graphics_get_ssr() -> bool:
+	var ssr: bool = SettingsFiles.get_setting("graphics", "ssr")
+	return ssr
+
+func graphics_set_ssr(toggle: bool) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.set_ssr_enabled(toggle)
+	SettingsFiles.apply_setting("graphics", "ssr", toggle)
+
+
+func graphics_get_ssr_steps() -> int:
+	var steps: int = SettingsFiles.get_setting("graphics", "ssr_steps")
+	return steps
+
+func graphics_set_ssr_steps(steps: int) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.ssr_max_steps = steps
+	SettingsFiles.apply_setting("graphics", "ssr_steps", steps)
+
+
+
+
 ## Audio
 func audio_get_volume(bus_index: int) -> float:
 	match bus_index:
