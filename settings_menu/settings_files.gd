@@ -55,6 +55,9 @@ func create_defaults() -> void:
 	new_config.set_value("graphics", "ssr", true)
 	new_config.set_value("graphics", "ssr_steps", 32)
 	
+	new_config.set_value("graphics", "ssao", true)
+	new_config.set_value("graphics", "ssao_quality", RenderingServer.ENV_SSAO_QUALITY_HIGH)
+	
 	new_config.set_value("audio", "master_volume", 1.0)
 	new_config.set_value("audio", "music_volume", 1.0)
 	new_config.set_value("audio", "effects_volume", 1.0)

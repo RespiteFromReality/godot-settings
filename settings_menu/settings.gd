@@ -312,6 +312,25 @@ func graphics_set_ssr_steps(steps: int) -> void:
 	SettingsFiles.apply_setting("graphics", "ssr_steps", steps)
 
 
+# SCREEN-SPACE AMBIENT OCCLUSION
+func graphics_get_ssao() -> bool:
+	var ssao: bool = SettingsFiles.get_setting("graphics", "ssao")
+	return ssao
+
+func graphics_set_ssao(toggle: bool) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.ssao_enabled = toggle
+	SettingsFiles.apply_setting("graphics", "ssao", toggle)
+
+
+func graphics_get_ssao_quality() -> RenderingServer.EnvironmentSSAOQuality:
+	var ssao_quality: RenderingServer.EnvironmentSSAOQuality = SettingsFiles.get_setting("graphics", "ssao_quality")
+	return ssao_quality
+
+func graphics_set_ssao_quality(quality: RenderingServer.EnvironmentSSAOQuality) -> void:
+	RenderingServer.environment_set_ssao_quality(quality, true, 0.5, 2, 50, 300)
+	SettingsFiles.apply_setting("graphics", "ssao_quality", quality)
 
 
 ## Audio
