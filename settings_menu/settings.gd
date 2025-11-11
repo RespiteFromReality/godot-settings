@@ -2,6 +2,7 @@ extends Node
 
 # ANTIALIASING
 enum ANTI_ALIASING { DISABLED, FXAA, SMAA, MSAA, TAA }
+enum GI { DISABLED, VOXELGI, SDFGI}
 
 func _ready() -> void:
 	load_settings()
@@ -256,7 +257,7 @@ func display_set_saturation(saturation: float) -> void:
 	SettingsFiles.apply_setting("display", "saturation", saturation)
 
 
-## Graphics
+## GRAPHICS
 func graphics_get_lod_threshold() -> float:
 	var threshold: float = SettingsFiles.get_setting("graphics", "lod_threshold")
 	return threshold
@@ -331,6 +332,66 @@ func graphics_get_ssao_quality() -> RenderingServer.EnvironmentSSAOQuality:
 func graphics_set_ssao_quality(quality: RenderingServer.EnvironmentSSAOQuality) -> void:
 	RenderingServer.environment_set_ssao_quality(quality, true, 0.5, 2, 50, 300)
 	SettingsFiles.apply_setting("graphics", "ssao_quality", quality)
+
+# GLOBAL ILLUMINATION
+func graphics_get_gi() -> GI:
+	var gi: GI = SettingsFiles.get_setting("graphics", "gi")
+	return gi
+
+func graphics_set_gi(gi: GI) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		reset_gi()
+		match gi:
+			GI.DISABLED:
+				pass
+			GI.VOXELGI:
+				pass
+			GI.SDFGI:
+				environment.sdfgi_enabled = true
+		
+	SettingsFiles.apply_setting("graphics", "gi", gi)
+
+func reset_gi() -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.sdfgi_enabled = false
+
+func graphics_get_gi_resolution() -> bool:
+	var gi_res: bool = SettingsFiles.get_setting("graphics", "gi_half_res")
+	return gi_res
+
+func graphics_set_gi_resolution(index: int) -> void:
+	RenderingServer.gi_set_use_half_resolution(index == 1)
+	SettingsFiles.apply_setting("graphics", "gi_half_res", index == 1)
+
+# SDFGI
+func graphics_get_sdfgi_cascades() -> int:
+	var sdfgi_cascades: int = SettingsFiles.get_setting("graphics", "sdfgi_cascades")
+	return sdfgi_cascades
+
+func graphics_set_sdfgi_cascades(cascades: int) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.sdfgi_cascades = cascades
+	SettingsFiles.apply_setting("graphics", "sdfgi_cascades", cascades)
+
+func graphics_get_sdfgi_rays() -> RenderingServer.EnvironmentSDFGIRayCount:
+	var rays: RenderingServer.EnvironmentSDFGIRayCount = SettingsFiles.get_setting("graphics", "sdfgi_rays")
+	return rays
+
+func graphics_set_sdfgi_rays(ray_count: RenderingServer.EnvironmentSDFGIRayCount) -> void:
+	RenderingServer.environment_set_sdfgi_ray_count(ray_count)
+	SettingsFiles.apply_setting("graphics", "sdfgi_rays", ray_count)
+
+# VOXEL GI
+func graphics_get_voxelgi_quality() -> RenderingServer.VoxelGIQuality:
+	var voxelgi_quality: RenderingServer.VoxelGIQuality = SettingsFiles.get_setting("graphics", "voxelgi_quality")
+	return voxelgi_quality
+
+func graphics_set_voxelgi_quality(quality: RenderingServer.VoxelGIQuality) -> void:
+	RenderingServer.voxel_gi_set_quality(quality)
+	SettingsFiles.apply_setting("graphics", "voxelgi_quality", quality)
 
 
 ## Audio

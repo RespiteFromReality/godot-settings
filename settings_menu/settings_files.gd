@@ -58,6 +58,12 @@ func create_defaults() -> void:
 	new_config.set_value("graphics", "ssao", true)
 	new_config.set_value("graphics", "ssao_quality", RenderingServer.ENV_SSAO_QUALITY_HIGH)
 	
+	new_config.set_value("graphics", "gi", Settings.GI.VOXELGI)
+	new_config.set_value("graphics", "gi_half_res", true)
+	new_config.set_value("graphics", "sdfgi_cascades", 4)
+	new_config.set_value("graphics", "sdfgi_rays", RenderingServer.EnvironmentSDFGIRayCount.ENV_SDFGI_RAY_COUNT_16)
+	new_config.set_value("graphics", "voxelgi_quality", RenderingServer.VOXEL_GI_QUALITY_LOW)
+	
 	new_config.set_value("audio", "master_volume", 1.0)
 	new_config.set_value("audio", "music_volume", 1.0)
 	new_config.set_value("audio", "effects_volume", 1.0)
