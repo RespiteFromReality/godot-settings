@@ -35,14 +35,18 @@ func load_settings() -> void:
 	# UPSCALER
 	var upscaler: int = SettingsFiles.get_setting("display", "upscaler")
 	display_set_upscaler(upscaler)
-	var render_scale: float = SettingsFiles.get_setting('display', "render_scale")
-	display_set_render_scale(render_scale)
 	
-	# FSR
-	var sharpness: float = SettingsFiles.get_setting("display", "fsr_sharpness")
-	var quality: float = SettingsFiles.get_setting("display", "fsr_quality")
-	display_set_fsr_sharpness(sharpness)
-	display_set_fsr_quality(quality)
+	if upscaler == 0:
+		# RENDER SCALE
+		var render_scale: float = SettingsFiles.get_setting('display', "render_scale")
+		display_set_render_scale(render_scale)
+	else:
+		# FSR
+		var sharpness: float = SettingsFiles.get_setting("display", "fsr_sharpness")
+		var quality: float = SettingsFiles.get_setting("display", "fsr_quality")
+		display_set_fsr_sharpness(sharpness)
+		display_set_fsr_quality(quality)
+	
 	
 	# ADJUSTMENTS
 	var environment: Environment = get_viewport().get_world_3d().environment
