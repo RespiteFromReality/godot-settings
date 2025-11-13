@@ -347,10 +347,8 @@ func graphics_set_gi(gi: GI) -> void:
 	if environment != null:
 		reset_gi()
 		match gi:
-			GI.DISABLED:
-				pass
 			GI.VOXELGI:
-				pass
+				pass # TODO: Figure out a good way to fetch and toggle voxelGI
 			GI.SDFGI:
 				environment.sdfgi_enabled = true
 		
@@ -360,6 +358,7 @@ func reset_gi() -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.sdfgi_enabled = false
+	# TODO: Figure out a good way to fetch and toggle voxelGI
 
 func graphics_get_gi_resolution() -> bool:
 	var gi_res: bool = SettingsFiles.get_setting("graphics", "gi_half_res")
