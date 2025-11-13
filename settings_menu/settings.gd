@@ -262,6 +262,7 @@ func display_set_saturation(saturation: float) -> void:
 
 
 ## GRAPHICS
+# LOD THRESHOLD
 func graphics_get_lod_threshold() -> float:
 	var threshold: float = SettingsFiles.get_setting("graphics", "lod_threshold")
 	return threshold
