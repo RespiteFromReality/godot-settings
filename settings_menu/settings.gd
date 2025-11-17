@@ -397,6 +397,25 @@ func graphics_set_voxelgi_quality(quality: RenderingServer.VoxelGIQuality) -> vo
 	RenderingServer.voxel_gi_set_quality(quality)
 	SettingsFiles.apply_setting("graphics", "voxelgi_quality", quality)
 
+# VOLUMETRIC FOG
+
+func graphics_get_volumetric_fog() -> bool:
+	var volumetric_fog: bool = SettingsFiles.get_setting("graphics", "volumetric_fog")
+	return volumetric_fog
+
+func graphics_set_volumetric_fog(toggle: bool) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.volumetric_fog_enabled = toggle
+	SettingsFiles.apply_setting("graphics", "volumetric_fog", toggle)
+
+func graphics_get_volumetric_fog_filtering() -> bool:
+	var filtering: bool = SettingsFiles.get_setting("graphics", "volumetric_fog_filtering")
+	return filtering
+
+func graphics_set_volumetric_fog_filtering(toggle: bool) -> void:
+	RenderingServer.environment_set_volumetric_fog_filter_active(toggle)
+	SettingsFiles.apply_setting("graphics", "volumetric_fog_filtering", toggle)
 
 ## Audio
 func audio_get_volume(bus_index: int) -> float:

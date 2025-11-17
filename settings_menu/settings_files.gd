@@ -64,6 +64,9 @@ func create_defaults() -> void:
 	new_config.set_value("graphics", "sdfgi_rays", RenderingServer.EnvironmentSDFGIRayCount.ENV_SDFGI_RAY_COUNT_16)
 	new_config.set_value("graphics", "voxelgi_quality", RenderingServer.VOXEL_GI_QUALITY_LOW)
 	
+	new_config.set_value("graphics", "volumetric_fog", true)
+	new_config.set_value("graphics", "volumetric_fog_filtering", true)
+	
 	new_config.set_value("audio", "master_volume", 1.0)
 	new_config.set_value("audio", "music_volume", 1.0)
 	new_config.set_value("audio", "effects_volume", 1.0)
