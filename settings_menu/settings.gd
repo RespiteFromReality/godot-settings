@@ -64,6 +64,47 @@ func load_settings() -> void:
 	var threshold: float = SettingsFiles.get_setting("graphics", "lod_threshold")
 	graphics_set_lod_threshold(threshold)
 	
+	# SSIL
+	var ssil: bool = SettingsFiles.get_setting("graphics", "ssil")
+	graphics_set_ssil(ssil)
+	var ssil_quality: RenderingServer.EnvironmentSSILQuality = SettingsFiles.get_setting("graphics", "ssil_quality")
+	graphics_set_ssil_quality(ssil_quality)
+	
+	# SSR
+	var ssr: bool = SettingsFiles.get_setting("graphics", "ssr")
+	graphics_set_ssr(ssr)
+	var ssr_steps: float = SettingsFiles.get_setting("graphics", "ssr_steps")
+	graphics_set_ssr_steps(ssr_steps)
+	
+	# SSAO
+	var ssao: bool = SettingsFiles.get_setting("graphics", "ssao")
+	graphics_set_ssao(ssao)
+	var ssao_quality: RenderingServer.EnvironmentSSAOQuality = SettingsFiles.get_setting("graphics", "ssao_quality")
+	graphics_set_ssao_quality(ssao_quality)
+	
+	# GLOBAL ILLUMINATION
+	var gi: GI = SettingsFiles.get_setting("graphics", "gi")
+	graphics_set_gi(gi)
+	var gi_res: bool = SettingsFiles.get_setting("graphics", "gi_half_res")
+	graphics_set_gi_resolution(gi_res)
+	
+	# SDFGI
+	var sdfgi_cascades: int = SettingsFiles.get_setting("graphics", "sdfgi_cascades")
+	graphics_set_sdfgi_cascades(sdfgi_cascades)
+	var sdfgi_rays: RenderingServer.EnvironmentSDFGIRayCount = SettingsFiles.get_setting("graphics", "sdfgi_rays")
+	graphics_set_sdfgi_rays(sdfgi_rays)
+	
+	# VOXELGI
+	var voxelgi_quality: RenderingServer.VoxelGIQuality = SettingsFiles.get_setting("graphics", "voxelgi_quality")
+	graphics_set_voxelgi_quality(voxelgi_quality)
+	
+	# VOLUMETRIC FOG
+	var volumetric_fog: bool = SettingsFiles.get_setting("graphics", "volumetric_fog")
+	graphics_set_volumetric_fog(volumetric_fog)
+	var volumetric_fog_filtering: bool = SettingsFiles.get_setting("graphics", "volumetric_fog_filtering")
+	graphics_set_volumetric_fog_filtering(volumetric_fog_filtering)
+	
+	
 
 # FOV
 func game_get_fov() -> float:
@@ -328,7 +369,6 @@ func graphics_set_ssao(toggle: bool) -> void:
 	if environment != null:
 		environment.ssao_enabled = toggle
 	SettingsFiles.apply_setting("graphics", "ssao", toggle)
-
 
 func graphics_get_ssao_quality() -> RenderingServer.EnvironmentSSAOQuality:
 	var ssao_quality: RenderingServer.EnvironmentSSAOQuality = SettingsFiles.get_setting("graphics", "ssao_quality")
