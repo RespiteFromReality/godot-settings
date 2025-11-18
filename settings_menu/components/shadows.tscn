@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw8yep4bsn48u"]
+
+[ext_resource type="Script" uid="uid://dns5s81tbthkv" path="res://settings_menu/components/shadows.gd" id="1_68s2d"]
+
+[node name="Shadows" type="GridContainer" unique_id=109173263]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
+script = ExtResource("1_68s2d")
+
+[node name="ShadowResolutionLabel" type="Label" parent="." unique_id=665588845]
+layout_mode = 2
+text = "Shadow Resolution"
+
+[node name="ShadowResolutionOptions" type="OptionButton" parent="." unique_id=790711273]
+layout_mode = 2
+selected = 0
+item_count = 6
+popup/item_0/text = "256"
+popup/item_0/id = 0
+popup/item_1/text = "512"
+popup/item_1/id = 1
+popup/item_2/text = "1024"
+popup/item_2/id = 2
+popup/item_3/text = "2048"
+popup/item_3/id = 3
+popup/item_4/text = "4096"
+popup/item_4/id = 4
+popup/item_5/text = "8192"
+popup/item_5/id = 5
+
+[node name="ShadowFilteringLabel" type="Label" parent="." unique_id=1350791063]
+layout_mode = 2
+text = "Shadow Filtering"
+
+[node name="ShadowFilteringOptions" type="OptionButton" parent="." unique_id=264368213]
+layout_mode = 2
+selected = 0
+item_count = 6
+popup/item_0/text = "Disabled (Hard)"
+popup/item_0/id = 0
+popup/item_1/text = "Very Low (Soft)"
+popup/item_1/id = 1
+popup/item_2/text = "Low (Soft)"
+popup/item_2/id = 2
+popup/item_3/text = "Medium (Soft)"
+popup/item_3/id = 3
+popup/item_4/text = "High (Soft)"
+popup/item_4/id = 4
+popup/item_5/text = "Ultra (Soft)"
+popup/item_5/id = 5
+
+[connection signal="item_selected" from="ShadowResolutionOptions" to="." method="_on_shadow_resolution_options_item_selected"]
+[connection signal="item_selected" from="ShadowFilteringOptions" to="." method="_on_shadow_filtering_options_item_selected"]

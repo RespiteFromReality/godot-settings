@@ -73,7 +73,7 @@ func load_settings() -> void:
 	# SSR
 	var ssr: bool = SettingsFiles.get_setting("graphics", "ssr")
 	graphics_set_ssr(ssr)
-	var ssr_steps: float = SettingsFiles.get_setting("graphics", "ssr_steps")
+	var ssr_steps: int = SettingsFiles.get_setting("graphics", "ssr_steps")
 	graphics_set_ssr_steps(ssr_steps)
 	
 	# SSAO
@@ -378,6 +378,7 @@ func graphics_set_ssao_quality(quality: RenderingServer.EnvironmentSSAOQuality) 
 	RenderingServer.environment_set_ssao_quality(quality, true, 0.5, 2, 50, 300)
 	SettingsFiles.apply_setting("graphics", "ssao_quality", quality)
 
+
 # GLOBAL ILLUMINATION
 func graphics_get_gi() -> GI:
 	var gi: GI = SettingsFiles.get_setting("graphics", "gi")
@@ -437,8 +438,8 @@ func graphics_set_voxelgi_quality(quality: RenderingServer.VoxelGIQuality) -> vo
 	RenderingServer.voxel_gi_set_quality(quality)
 	SettingsFiles.apply_setting("graphics", "voxelgi_quality", quality)
 
-# VOLUMETRIC FOG
 
+# VOLUMETRIC FOG
 func graphics_get_volumetric_fog() -> bool:
 	var volumetric_fog: bool = SettingsFiles.get_setting("graphics", "volumetric_fog")
 	return volumetric_fog
@@ -456,6 +457,42 @@ func graphics_get_volumetric_fog_filtering() -> bool:
 func graphics_set_volumetric_fog_filtering(toggle: bool) -> void:
 	RenderingServer.environment_set_volumetric_fog_filter_active(toggle)
 	SettingsFiles.apply_setting("graphics", "volumetric_fog_filtering", toggle)
+
+# SHADOWS
+func graphics_get_shadow_resolution_directional() -> float:
+	var res_directional: float = SettingsFiles.get_setting("graphics", "shadow_resolution_directional")
+	return res_directional
+
+func graphics_set_shadow_resolution_directional(resolution: int) -> void:
+	RenderingServer.directional_shadow_atlas_set_size(resolution, true)
+	SettingsFiles.apply_setting("graphics", "shadow_resolution_directional", resolution)
+
+func graphics_get_shadow_resolution_positional() -> float:
+	var res_positional: float = SettingsFiles.get_setting("graphics", "shadow_resolution_positional")
+	return res_positional
+
+func graphics_set_shadow_resolution_positional(resolution: int) -> void:
+	get_viewport().positional_shadow_atlas_size = resolution
+	SettingsFiles.apply_setting("graphics", "shadow_resolution_positional", resolution)
+
+
+func graphics_get_shadow_filtering_directional() -> RenderingServer.ShadowQuality:
+	var shadow_quality: RenderingServer.ShadowQuality = SettingsFiles.get_setting("graphics", "shadow_filtering_directional")
+	return shadow_quality
+
+func graphics_set_shadow_filtering_directional(quality: RenderingServer.ShadowQuality) -> void:
+	RenderingServer.directional_soft_shadow_filter_set_quality(quality)
+	SettingsFiles.apply_setting("graphics", "shadow_filtering_directional", quality)
+
+
+func graphics_get_shadow_filtering_positional() -> RenderingServer.ShadowQuality:
+	var shadow_quality: RenderingServer.ShadowQuality = SettingsFiles.get_setting("graphics", "shadow_filtering_positional")
+	return shadow_quality
+
+func graphics_set_shadow_filtering_positional(quality: RenderingServer.ShadowQuality) -> void:
+	RenderingServer.positional_soft_shadow_filter_set_quality(quality)
+	SettingsFiles.apply_setting("graphics", "shadow_filtering_positional", quality)
+
 
 ## Audio
 func audio_get_volume(bus_index: int) -> float:
