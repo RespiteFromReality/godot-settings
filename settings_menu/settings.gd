@@ -104,7 +104,13 @@ func load_settings() -> void:
 	var volumetric_fog_filtering: bool = SettingsFiles.get_setting("graphics", "volumetric_fog_filtering")
 	graphics_set_volumetric_fog_filtering(volumetric_fog_filtering)
 	
-	
+	# SHADOWS
+	var resolution: int = Settings.graphics_get_shadow_resolution_directional()
+	graphics_set_shadow_resolution_directional(resolution)
+	graphics_set_shadow_resolution_positional(resolution)
+	var filtering: RenderingServer.ShadowQuality = Settings.graphics_get_shadow_filtering_directional()
+	graphics_set_shadow_filtering_directional(filtering)
+	graphics_set_shadow_filtering_positional(filtering)
 
 # FOV
 func game_get_fov() -> float:
@@ -459,16 +465,16 @@ func graphics_set_volumetric_fog_filtering(toggle: bool) -> void:
 	SettingsFiles.apply_setting("graphics", "volumetric_fog_filtering", toggle)
 
 # SHADOWS
-func graphics_get_shadow_resolution_directional() -> float:
-	var res_directional: float = SettingsFiles.get_setting("graphics", "shadow_resolution_directional")
+func graphics_get_shadow_resolution_directional() -> int:
+	var res_directional: int = SettingsFiles.get_setting("graphics", "shadow_resolution_directional")
 	return res_directional
 
 func graphics_set_shadow_resolution_directional(resolution: int) -> void:
 	RenderingServer.directional_shadow_atlas_set_size(resolution, true)
 	SettingsFiles.apply_setting("graphics", "shadow_resolution_directional", resolution)
 
-func graphics_get_shadow_resolution_positional() -> float:
-	var res_positional: float = SettingsFiles.get_setting("graphics", "shadow_resolution_positional")
+func graphics_get_shadow_resolution_positional() -> int:
+	var res_positional: int = SettingsFiles.get_setting("graphics", "shadow_resolution_positional")
 	return res_positional
 
 func graphics_set_shadow_resolution_positional(resolution: int) -> void:
