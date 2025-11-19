@@ -72,6 +72,9 @@ func create_defaults() -> void:
 	new_config.set_value("graphics", "shadow_filtering_positional", RenderingServer.ShadowQuality.SHADOW_QUALITY_SOFT_MEDIUM)
 	new_config.set_value("graphics", "shadow_filtering_directional", RenderingServer.ShadowQuality.SHADOW_QUALITY_SOFT_MEDIUM)
 	
+	new_config.set_value("graphics", "bloom", true)
+	new_config.set_value("graphics", "bloom_bicubic", true)
+	
 	new_config.set_value("audio", "master_volume", 1.0)
 	new_config.set_value("audio", "music_volume", 1.0)
 	new_config.set_value("audio", "effects_volume", 1.0)

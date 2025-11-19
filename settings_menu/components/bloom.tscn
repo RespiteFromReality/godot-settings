@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwtsjms3ni4ip"]
+
+[ext_resource type="Script" uid="uid://bu3k0afto2m8u" path="res://settings_menu/components/bloom.gd" id="1_l5ej3"]
+
+[node name="Bloom" type="HBoxContainer" unique_id=1611267685]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_l5ej3")
+
+[node name="BloomLabel" type="Label" parent="." unique_id=905186205]
+layout_mode = 2
+text = "Bloom"
+
+[node name="BloomOptions" type="OptionButton" parent="." unique_id=934012058]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Low"
+popup/item_1/id = 1
+popup/item_2/text = "High"
+popup/item_2/id = 2
+
+[connection signal="item_selected" from="BloomOptions" to="." method="_on_bloom_options_item_selected"]

@@ -111,6 +111,10 @@ func load_settings() -> void:
 	var filtering: RenderingServer.ShadowQuality = Settings.graphics_get_shadow_filtering_directional()
 	graphics_set_shadow_filtering_directional(filtering)
 	graphics_set_shadow_filtering_positional(filtering)
+	
+	# BLOOM
+	var bloom: int = Settings.graphics_get_bloom()
+	graphics_set_bloom(bloom)
 
 # FOV
 func game_get_fov() -> float:
@@ -499,6 +503,25 @@ func graphics_set_shadow_filtering_positional(quality: RenderingServer.ShadowQua
 	RenderingServer.positional_soft_shadow_filter_set_quality(quality)
 	SettingsFiles.apply_setting("graphics", "shadow_filtering_positional", quality)
 
+
+# BLOOM
+func graphics_get_bloom() -> bool:
+	var bloom: bool = SettingsFiles.get_setting("graphics", "bloom")
+	return bloom
+
+func graphics_set_bloom(bloom: bool) -> void:
+	var environment: Environment = get_viewport().get_world_3d().environment
+	if environment != null:
+		environment.glow_bloom = bloom
+	SettingsFiles.apply_setting("graphics", "bloom", bloom)
+
+func graphics_get_bloom_bicubic() -> bool:
+	var bicubic: bool = SettingsFiles.get_setting("graphics", "bloom_bicubic")
+	return bicubic
+
+func graphics_set_bloom_bicubic(bicubic: bool) -> void:
+	RenderingServer.environment_glow_set_use_bicubic_upscale(bicubic)
+	SettingsFiles.apply_setting("graphics", "bloom_bicubic", bicubic)
 
 ## Audio
 func audio_get_volume(bus_index: int) -> float:
