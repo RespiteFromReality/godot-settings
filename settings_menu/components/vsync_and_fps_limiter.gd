@@ -5,7 +5,7 @@ const color_white = Color.WHITE
 
 @onready var vsync: OptionButton = $VSync
 @onready var fps_limit_toggleable_label: ToggleableLabel = $FPSLimitToggleableLabel
-@onready var fps_limit: SliderWithValue = $FPSLimit
+@onready var fps_limit_slider: FPSSlider = $FPSLimitSlider
 
 
 func _ready() -> void:
@@ -17,15 +17,15 @@ func _ready() -> void:
 		toggle_fps_limiter(false)
 
 	var max_fps: int = Settings.display_get_max_fps()
-	fps_limit.set_block_signals(true)
-	fps_limit.slider_value = max_fps
-	fps_limit.set_block_signals(false)
+	fps_limit_slider.set_block_signals(true)
+	fps_limit_slider.set_value(max_fps)
+	fps_limit_slider.set_block_signals(false)
 
 
 func toggle_fps_limiter(state: bool) -> void:
-	fps_limit.editable_slider = state
-	fps_limit.label_toggle = state
 	fps_limit_toggleable_label.enabled = state
+	fps_limit_slider.set_label_enabled(state)
+	fps_limit_slider.set_editable(state)
 
 
 func _on_vsync_item_selected(index: int) -> void:
@@ -41,6 +41,11 @@ func _on_vsync_item_selected(index: int) -> void:
 			Settings.display_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
 
 
-func _on_fps_limit_drag_ended(value: float) -> void:
-	var max_fps: int = int(value)
+# To ensure smooth sliding, when the drag starts we set the FPS to 60.
+func _on_fps_limit_slider_drag_started() -> void:
+	Settings.display_set_max_fps(60)
+
+
+func _on_fps_limit_slider_drag_ended(value: int) -> void:
+	var max_fps: int = value
 	Settings.display_set_max_fps(max_fps)

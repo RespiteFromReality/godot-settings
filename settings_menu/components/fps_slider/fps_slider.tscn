@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgfnjxpg83l81"]
+
+[ext_resource type="Script" uid="uid://filyu5704wxi" path="res://settings_menu/components/fps_slider/fps_slider.gd" id="1_6xk2x"]
+[ext_resource type="Script" uid="uid://d270vtwfidiph" path="res://settings_menu/components/toggleable_label/toggleable_label.gd" id="2_0gllv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ba8ne"]
+bg_color = Color(0.37830356, 0.39208335, 0.39896816, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8ild"]
+bg_color = Color(0.57700837, 0.5770084, 0.57700837, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[node name="FPSSlider" type="Control"]
+custom_minimum_size = Vector2(295, 24)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 295.0
+offset_bottom = 24.0
+size_flags_horizontal = 0
+script = ExtResource("1_6xk2x")
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 24.0
+pivot_offset = Vector2(134, 8)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/grabber_offset = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_ba8ne")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_f8ild")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_f8ild")
+rounded = true
+scrollable = false
+ticks_position = 3
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(73, 0)
+layout_mode = 0
+offset_left = 221.0
+offset_right = 294.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "0 FPS"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("2_0gllv")
+greyed_out_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+metadata/_custom_type_script = "uid://d270vtwfidiph"
+
+[connection signal="drag_ended" from="HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="drag_started" from="HSlider" to="." method="_on_h_slider_drag_started"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
