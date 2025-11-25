@@ -17,8 +17,10 @@ text = "FOV"
 
 [node name="FOV" parent="." instance=ExtResource("1_wti4f")]
 layout_mode = 2
-slider_range_min = 60.0
-slider_range_max = 140.0
-slider_starting_value = 90.0
+rounded = true
+min_value = 60.0
+max_value = 140.0
+value = 75.0
+decimals_padding = 0
 
 [connection signal="slider_value_changed" from="FOV" to="." method="_on_fov_slider_value_changed"]

@@ -41,14 +41,10 @@ func _ready() -> void:
 	fsr_quality_dropdown.set_block_signals(false)
 
 	var fsr_sharpness: float = Settings.display_get_fsr_sharpness()
-	fsr_sharpness_slider.set_block_signals(true)
-	fsr_sharpness_slider.slider_value = invert_sharpness(0, 2, fsr_sharpness)
-	fsr_sharpness_slider.set_block_signals(false)
+	fsr_sharpness_slider.set_value_no_signal(invert_sharpness(0, 2, fsr_sharpness))
 
 	var render_scale: float = Settings.display_get_render_scale()
-	render_scale_slider.set_block_signals(true)
-	render_scale_slider.slider_value = render_scale
-	render_scale_slider.set_block_signals(false)
+	render_scale_slider.set_value_no_signal(render_scale)
 
 
 func invert_sharpness(_min: float, _max: float, value: float) -> float:
@@ -104,6 +100,6 @@ func _on_upscaling_item_selected(index: int) -> void:
 	match index:
 		0:
 			Settings.display_set_upscaler(Viewport.SCALING_3D_MODE_BILINEAR)
-			Settings.display_set_render_scale(render_scale_slider.slider_value)
+			Settings.display_set_render_scale(render_scale_slider.get_value())
 		1:
 			Settings.display_set_upscaler(Viewport.SCALING_3D_MODE_FSR2)

@@ -30,11 +30,12 @@ text = "SSR Steps"
 [node name="SSRStepsSlider" parent="." instance=ExtResource("2_mdj25")]
 visible = false
 layout_mode = 2
-slider_range_min = 2.0
-slider_range_max = 128.0
-slider_starting_value = 32.0
-slider_steps = 2.0
 rounded = true
+min_value = 2.0
+max_value = 128.0
+value = 32.0
+step = 2.0
+decimals_padding = 0
 
 [connection signal="item_selected" from="SSROptions" to="." method="_on_ssr_options_item_selected"]
 [connection signal="slider_value_changed" from="SSRStepsSlider" to="." method="_on_screen_space_reflections_quality_slider_slider_value_changed"]

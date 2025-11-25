@@ -13,9 +13,7 @@ func _ready() -> void:
 	toggle_submenu(int(ssr))
 	
 	var ssr_steps: int = Settings.graphics_get_ssr_steps()
-	ssr_steps_slider.set_block_signals(true)
-	ssr_steps_slider.slider_value = ssr_steps
-	ssr_steps_slider.set_block_signals(false)
+	ssr_steps_slider.set_value_no_signal(ssr_steps)
 
 
 func toggle_submenu(index: int) -> void:

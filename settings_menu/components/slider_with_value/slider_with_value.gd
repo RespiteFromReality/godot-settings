@@ -1,95 +1,114 @@
 @tool
-
-extends Control 
 class_name SliderWithValue
+extends Control 
 
 signal slider_value_changed(value: float)
-signal drag_ended(value: float)
+
 
 @export_category("Slider")
-@export var editable_slider: bool = true :
-	get(): return %HSlider.editable
-	set(value): %HSlider.editable = value
-@export var slider_range_min: float
-@export var slider_range_max: float
-@export var slider_starting_value: float
-@export var slider_steps: float
-@export var zero_means_disabled: bool
-@export var rounded: bool:
-	get(): return %HSlider.rounded
-	set(value): %HSlider.rounded = value
+@export var editable: bool = true
+@export var rounded: bool = false
+@export var min_value: float = 0
+@export var max_value: float = 100
+@export var value: float = 0
+@export var step: float = 1
 @export_category("Label")
-@export var label_toggle: bool = true :
-	get(): return %SliderValueLabel.enabled
-	set(value): %SliderValueLabel.enabled = value
-@export_range(0, 2, 1, "or_greater") var decimals_padding: int = 0
-@export var unit: String;
-@export_category("Sound")
-@export var slider_sound: AudioStream
+@export var label_toggle: bool = true
+@export var zero_means_disabled: bool = false
+@export_range(0, 2, 1, "or_greater") var decimals_padding: int = 1
+## A string suffix appended after the value, leave empty for none.
+@export var suffix: String = ""
 
-var slider_value: float :
-	get: return %HSlider.value
-	set(_value): %HSlider.value = _value
-
-func _get_configuration_warnings() -> PackedStringArray: # Creates editor warnings 
-	var msgs: PackedStringArray
-	if (slider_value_changed.has_connections() != true && drag_ended.has_connections() != true):
-		msgs.append("This component has no connections to any of its signals!")
-	if slider_range_min == null || slider_range_max == null:
-		msgs.append("Range values cannot be null!")
-	if slider_range_max < slider_range_min:
-		msgs.append("Slider max range must be more than min range!")
-	if (slider_starting_value > slider_range_max || slider_starting_value < slider_range_min):
-		msgs.append("The starting value is smaller or largest than the slider range!")
-	if (slider_steps == 0):
-		msgs.append("Slider cannot have 0 steps!")
-	if (decimals_padding < 0):
-		msgs.append("Decimal padding cannot be a negative value! ")
-	return msgs
-
-
-func _on_h_slider_value_changed(_slider_value: float) -> void:
-	slider_value = _slider_value
-	if (slider_value == 0 && zero_means_disabled == true):
-		%SliderValueLabel.text = "Disabled"
-	else:
-		%SliderValueLabel.text = str(slider_value).pad_decimals(decimals_padding) + unit
-	
-	%SliderSoundEffect.play()
-	slider_value_changed.emit(slider_value)
-
-
-func _on_h_slider_drag_ended(_value_changed: bool) -> void:
-	slider_value = %HSlider.value
-	if (%HSlider.value == 0 && zero_means_disabled == true):
-		%SliderValueLabel.text = "Disabled"
-	else:
-		%SliderValueLabel.text = str(%HSlider.value).pad_decimals(decimals_padding) + unit
-	
-	%SliderSoundEffect.play()
-	drag_ended.emit(%HSlider.value)
+@onready var h_slider: HSlider = $HSlider
+@onready var label: ToggleableLabel = $Label
 
 
 func _ready() -> void:
-	%HSlider.set_block_signals(true) # Block signals during initial setup, as min_value changes also trigger value_changed signal.
+	h_slider.set_block_signals(true)
+	set_editable(editable)
+	set_min_value(min_value)
+	set_max_value(max_value)
+	set_rounded(rounded)
+	set_value(value)
+	set_step(step)
+	h_slider.set_block_signals(false)
 	
-	## Do not shuffle order to avoid snapping to int.
-	%HSlider.min_value = slider_range_min
-	%HSlider.max_value = slider_range_max
-	%HSlider.step = slider_steps
-	%HSlider.value = slider_starting_value
-	slider_value = slider_starting_value
-	%HSlider.set_block_signals(false)
-	
-	%SliderValueLabel.text = str(slider_starting_value).pad_decimals(decimals_padding) + unit
-	
-	%SliderSoundEffect.stream = slider_sound
+	label.set_block_signals(true)
+	set_label_value(value)
+	label.set_block_signals(false)
+# Config functions
 
-func reset_value() -> void:
-	%HSlider.value = slider_starting_value
+# Slider
+func get_editable() -> bool:
+	return h_slider.editable
 
-func reset_value_no_signal() -> void:
-	%HSlider.set_value_no_signal(slider_starting_value)
+func set_editable(_editable: bool) -> void:
+	h_slider.editable = _editable
 
-func toggle_slider(toggle: bool) -> void:
-	%HSlider.editable = toggle
+func get_min_value() -> float:
+	return h_slider.min_value
+
+func set_min_value(_min_value: float) -> void:
+	h_slider.min_value = _min_value
+
+func get_max_value() -> float:
+	return h_slider.max_value
+
+func set_max_value(_max_value: float) -> void:
+	h_slider.max_value = max_value
+
+func get_rounded() -> bool:
+	return h_slider.rounded
+
+func set_rounded(_rounded: bool) -> void:
+	h_slider.rounded = _rounded
+
+func get_step() -> float:
+	return h_slider.step
+
+func set_step(_step: float) -> void:
+	h_slider.step = step
+
+func get_value() -> float:
+	return h_slider.value
+
+func set_value(_value: float) -> void:
+	h_slider.value = _value
+
+func set_value_no_signal(_value: float) -> void:
+	self.set_block_signals(true)
+	h_slider.value = _value
+	self.set_block_signals(false)
+
+# Label
+func get_label_value() -> String:
+	return label.text
+
+func set_label_value(_value: float) -> void:
+	if _value == 0 && zero_means_disabled == true:
+		label.text = "Disabled"
+	else:
+		label.text = str(_value).pad_decimals(decimals_padding) + " " + suffix
+
+
+# Signals
+
+func _on_h_slider_value_changed(_value: float) -> void:
+	set_label_value(_value)
+	slider_value_changed.emit(_value)
+
+
+# Editor
+func _get_configuration_warnings() -> PackedStringArray: # Creates editor warnings 
+	var msgs: PackedStringArray
+	if slider_value_changed.has_connections() != true:
+		msgs.append("This component has no connections to any of its signals!")
+	if max_value < min_value:
+		msgs.append("Slider max range must be more than min range!")
+	if value > max_value || value < min_value:
+		msgs.append("The starting value is smaller or largest than the range!")
+	if step == 0:
+		msgs.append("Slider cannot have 0 steps!")
+	if decimals_padding < 0:
+		msgs.append("Decimal padding cannot be a negative value! ")
+	return msgs

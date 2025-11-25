@@ -5,7 +5,7 @@ extends Control
 
 func _ready() -> void:
 	var fov: float = Settings.game_get_fov()
-	fov_slider.slider_value = fov
+	fov_slider.set_value_no_signal(fov)
 
 
 func _on_fov_slider_value_changed(value: float) -> void:

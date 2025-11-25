@@ -30,17 +30,18 @@ popup/item_1/id = 1
 
 [node name="RenderScaleLabel" type="Label" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Render Scale"
 
 [node name="RenderScaleSlider" parent="." instance=ExtResource("1_tgnp2")]
 layout_mode = 2
-slider_range_min = 0.25
-slider_range_max = 2.0
-slider_starting_value = 1.0
-slider_steps = 0.25
+min_value = 0.25
+max_value = 2.0
+value = 1.0
+step = 0.25
 decimals_padding = 2
-unit = "x"
+suffix = "x"
 
 [node name="FSRQualityLabel" type="Label" parent="."]
 visible = false
@@ -68,19 +69,16 @@ popup/item_4/text = "Performance"
 popup/item_4/id = 4
 
 [node name="FSRSharpnessLabel" type="Label" parent="."]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "FSR Sharpness"
 
 [node name="FSRSharpnessSlider" parent="." instance=ExtResource("1_tgnp2")]
-visible = false
 layout_mode = 2
-slider_range_max = 2.0
-slider_starting_value = 0.2
-slider_steps = 0.1
-decimals_padding = 1
+max_value = 2.0
+value = 0.2
+step = 0.1
 
 [connection signal="item_selected" from="Upscaling" to="." method="_on_upscaling_item_selected"]
 [connection signal="slider_value_changed" from="RenderScaleSlider" to="." method="_on_render_scale_slider_slider_value_changed"]

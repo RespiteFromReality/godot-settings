@@ -5,9 +5,7 @@ extends Control
 
 func _ready() -> void:
 	var threshold: float = Settings.graphics_get_lod_threshold()
-	threshold_slider.set_block_signals(true)
-	threshold_slider.slider_value = threshold
-	threshold_slider.set_block_signals(false)
+	threshold_slider.set_value_no_signal(threshold)
 
 
 func _on_lod_threshold_slider_value_changed(lod_threshold: float) -> void:

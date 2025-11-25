@@ -25,9 +25,7 @@ func _ready() -> void:
 	gi_resolution_option.set_block_signals(false)
 	
 	var sdfgi_cascades: int = Settings.graphics_get_sdfgi_cascades()
-	sdfgi_cascades_slider.set_block_signals(true)
-	sdfgi_cascades_slider.slider_value = sdfgi_cascades
-	sdfgi_cascades_slider.set_block_signals(false)
+	sdfgi_cascades_slider.set_value_no_signal(sdfgi_cascades)
 	
 	var rays: int = Settings.graphics_get_sdfgi_rays()
 	sdfgi_probe_rays_options.set_block_signals(true)

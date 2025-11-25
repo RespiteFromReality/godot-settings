@@ -13,7 +13,10 @@ text = "Master"
 
 [node name="MasterVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
 layout_mode = 2
-unit = "%"
+rounded = true
+value = 100.0
+decimals_padding = 0
+suffix = "%"
 
 [node name="MusicVolumeLabel" type="Label" parent="."]
 layout_mode = 2
@@ -21,7 +24,10 @@ text = "Music"
 
 [node name="MusicVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
 layout_mode = 2
-unit = "%"
+rounded = true
+value = 100.0
+decimals_padding = 0
+suffix = "%"
 
 [node name="EffectsVolumeLabel" type="Label" parent="."]
 layout_mode = 2
@@ -29,7 +35,10 @@ text = "Effects"
 
 [node name="EffectsVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
 layout_mode = 2
-unit = "%"
+rounded = true
+value = 100.0
+decimals_padding = 0
+suffix = "%"
 
 [node name="AmbientVolumeLabel" type="Label" parent="."]
 layout_mode = 2
@@ -37,7 +46,10 @@ text = "Ambient"
 
 [node name="AmbientVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
 layout_mode = 2
-unit = "%"
+rounded = true
+value = 100.0
+decimals_padding = 0
+suffix = "%"
 
 [node name="VoiceVolumeLabel" type="Label" parent="."]
 layout_mode = 2
@@ -45,7 +57,10 @@ text = "Voice"
 
 [node name="VoiceVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
 layout_mode = 2
-unit = "%"
+rounded = true
+value = 100.0
+decimals_padding = 0
+suffix = "%"
 
 [node name="UIVolumeLabel" type="Label" parent="."]
 layout_mode = 2
@@ -53,7 +68,10 @@ text = "UI"
 
 [node name="UIVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
 layout_mode = 2
-unit = "%"
+rounded = true
+value = 100.0
+decimals_padding = 0
+suffix = "%"
 
 [connection signal="slider_value_changed" from="MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="slider_value_changed" from="MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]

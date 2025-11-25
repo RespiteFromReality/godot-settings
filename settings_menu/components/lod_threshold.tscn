@@ -24,8 +24,9 @@ text = "LOD Threshold"
 
 [node name="LODThreshold" parent="." instance=ExtResource("2_ujapk")]
 layout_mode = 2
-slider_range_max = 32.0
-slider_starting_value = 2.0
+max_value = 32.0
+value = 2.0
 zero_means_disabled = true
+decimals_padding = 0
 
 [connection signal="slider_value_changed" from="LODThreshold" to="." method="_on_lod_threshold_slider_value_changed"]

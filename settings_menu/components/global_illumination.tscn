@@ -45,16 +45,19 @@ text = "SDFGI Cascades"
 [node name="SDFGICascadesSlider" parent="." instance=ExtResource("2_6q6ie")]
 visible = false
 layout_mode = 2
-slider_range_min = 1.0
-slider_range_max = 8.0
-slider_starting_value = 4.0
 rounded = true
+min_value = 1.0
+max_value = 8.0
+value = 1.0
+decimals_padding = 0
 
 [node name="SDFGIProbeRaysLabel" type="Label" parent="."]
+visible = false
 layout_mode = 2
 text = "SDFGI Ray Count"
 
 [node name="SDFGIProbeRaysOptions" type="OptionButton" parent="."]
+visible = false
 layout_mode = 2
 selected = 1
 item_count = 7

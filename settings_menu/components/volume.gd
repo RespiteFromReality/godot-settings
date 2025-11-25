@@ -23,12 +23,12 @@ func _ready() -> void:
 	var ambient_volume: float = Settings.audio_get_volume(ambient_index)
 	var voice_volume: float = Settings.audio_get_volume(voice_index)
 	var ui_volume: float = Settings.audio_get_volume(ui_index)
-	master_volume_slider.slider_value = master_volume * 100
-	music_volume_slider.slider_value = music_volume * 100
-	effects_volume_slider.slider_value = effects_volume * 100
-	ambient_volume_slider.slider_value = ambient_volume * 100
-	voice_volume_slider.slider_value = voice_volume * 100
-	ui_volume_slider.slider_value = ui_volume * 100
+	master_volume_slider.set_value_no_signal(master_volume * 100)
+	music_volume_slider.set_value_no_signal(music_volume * 100)
+	effects_volume_slider.set_value_no_signal(effects_volume * 100)
+	ambient_volume_slider.set_value_no_signal(ambient_volume * 100)
+	voice_volume_slider.set_value_no_signal(voice_volume * 100)
+	ui_volume_slider.set_value_no_signal(ui_volume * 100)
 
 
 func _on_master_volume_slider_value_changed(value: float) -> void:

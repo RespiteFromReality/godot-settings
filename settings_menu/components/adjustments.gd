@@ -7,17 +7,13 @@ extends Control
 
 func _ready() -> void:
 	var brightness: float = Settings.display_get_brightness()
-	brightness_slider.set_block_signals(true)
-	brightness_slider.slider_value = brightness
-	brightness_slider.set_block_signals(false)
+	brightness_slider.set_value_no_signal(brightness)
+	
 	var constrast: float = Settings.display_get_contrast()
-	contrast_slider.set_block_signals(true)
-	contrast_slider.slider_value = constrast
-	contrast_slider.set_block_signals(false)
+	contrast_slider.set_value_no_signal(constrast)
+	
 	var saturation: float = Settings.display_get_saturation()
-	saturation_slider.set_block_signals(true)
-	saturation_slider.slider_value = saturation
-	saturation_slider.set_block_signals(false)
+	saturation_slider.set_value_no_signal(saturation)
 
 
 # Color Adjustments

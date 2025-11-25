@@ -17,11 +17,9 @@ text = "Brightness"
 
 [node name="Brightness" parent="." instance=ExtResource("1_jjtvj")]
 layout_mode = 2
-slider_range_min = 0.2
-slider_range_max = 1.8
-slider_starting_value = 1.0
-slider_steps = 0.05
-decimals_padding = 2
+max_value = 2.0
+value = 1.0
+step = 0.1
 
 [node name="ContrastLabel" type="Label" parent="."]
 layout_mode = 2
@@ -31,11 +29,9 @@ text = "Contrast"
 
 [node name="Contrast" parent="." instance=ExtResource("1_jjtvj")]
 layout_mode = 2
-slider_range_min = 0.2
-slider_range_max = 1.8
-slider_starting_value = 1.0
-slider_steps = 0.05
-decimals_padding = 2
+max_value = 2.0
+value = 1.0
+step = 0.1
 
 [node name="SaturationLabel" type="Label" parent="."]
 layout_mode = 2
@@ -45,10 +41,9 @@ text = "Saturation"
 
 [node name="Saturation" parent="." instance=ExtResource("1_jjtvj")]
 layout_mode = 2
-slider_range_max = 2.0
-slider_starting_value = 1.0
-slider_steps = 0.05
-decimals_padding = 2
+max_value = 2.0
+value = 1.0
+step = 0.1
 
 [connection signal="slider_value_changed" from="Brightness" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="slider_value_changed" from="Contrast" to="." method="_on_contrast_slider_value_changed"]
