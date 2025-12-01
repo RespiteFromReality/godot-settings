@@ -20,10 +20,10 @@ func _on_bloom_options_item_selected(index: int) -> void:
 	match index:
 		0:
 			Settings.graphics_set_bloom(false)
-			Settings.graphics_set_bloom_bocubic(false)
+			Settings.graphics_set_bloom_bicubic(false)
 		1:
 			Settings.graphics_set_bloom(true)
-			Settings.graphics_set_bloom_bocubic(false)
+			Settings.graphics_set_bloom_bicubic(false)
 		2:
 			Settings.graphics_set_bloom(true)
-			Settings.graphics_set_bloom_bocubic(true)
+			Settings.graphics_set_bloom_bicubic(true)
