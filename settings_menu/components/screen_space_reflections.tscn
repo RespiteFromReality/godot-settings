@@ -3,18 +3,28 @@
 [ext_resource type="Script" uid="uid://crimggkb8irum" path="res://settings_menu/components/screen_space_reflections.gd" id="1_ds2ss"]
 [ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="2_mdj25"]
 
-[node name="ScreenSpaceReflections" type="GridContainer"]
-offset_right = 412.0
-offset_bottom = 50.0
+[node name="ScreenSpaceReflections" type="GridContainer" unique_id=981031940]
+anchors_preset = -1
+anchor_top = 0.027
+anchor_bottom = 0.027
+offset_top = -29.16
+offset_right = 434.0
+offset_bottom = 29.84
+grow_horizontal = 0
+grow_vertical = 2
 columns = 2
 script = ExtResource("1_ds2ss")
 
-[node name="SSRLabel" type="Label" parent="."]
+[node name="SSRLabel" type="Label" parent="." unique_id=1004051630]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "SSR"
 
-[node name="SSROptions" type="OptionButton" parent="."]
+[node name="SSROptions" type="OptionButton" parent="." unique_id=154108487]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 selected = 0
 item_count = 2
 popup/item_0/text = "Disabled"
@@ -22,12 +32,14 @@ popup/item_0/id = 0
 popup/item_1/text = "Enabled"
 popup/item_1/id = 1
 
-[node name="SSRStepsLabel" type="Label" parent="."]
+[node name="SSRStepsLabel" type="Label" parent="." unique_id=381446609]
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 text = "SSR Steps"
 
-[node name="SSRStepsSlider" parent="." instance=ExtResource("2_mdj25")]
+[node name="SSRStepsSlider" parent="." unique_id=390372183 instance=ExtResource("2_mdj25")]
 visible = false
 layout_mode = 2
 rounded = true

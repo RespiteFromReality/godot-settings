@@ -3,26 +3,30 @@
 [ext_resource type="Script" uid="uid://c6832edpwlj5t" path="res://settings_menu/components/anti_aliasing.gd" id="1_kug44"]
 [ext_resource type="Texture2D" uid="uid://bmx4wa4da4alv" path="res://settings_menu/assets/NodeWarning.svg" id="2_44im6"]
 
-[node name="AntiAliasing" type="GridContainer"]
+[node name="AntiAliasing" type="GridContainer" unique_id=1718970332]
 editor_description = "Allows selecting Anti-Aliasing options.
 Options: Disabled, FXAA, SMAA, MSAA, TAA
 
 Be aware that when FSR is on TAA is also always on.
 
 Be aware that MSAA 2x currently has artifacts on Vulkan with AMD. See issue !97750."
-custom_minimum_size = Vector2(540, 0)
-theme_override_constants/v_separation = 8
+anchors_preset = -1
+anchor_right = 0.15833333
+anchor_bottom = 0.06481481
+grow_horizontal = 2
 columns = 2
 script = ExtResource("1_kug44")
 metadata/_edit_use_anchors_ = true
 
-[node name="AALabel" type="Label" parent="."]
+[node name="AALabel" type="Label" parent="." unique_id=932717180]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Anti-aliasing"
 
-[node name="AAOptionButton" type="OptionButton" parent="."]
-custom_minimum_size = Vector2(140, 0)
+[node name="AAOptionButton" type="OptionButton" parent="." unique_id=1552179392]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 16
@@ -39,17 +43,19 @@ popup/item_3/id = 3
 popup/item_4/text = "TAA"
 popup/item_4/id = 4
 
-[node name="MSAAQualityLabel" type="Label" parent="."]
+[node name="MSAAQualityLabel" type="Label" parent="." unique_id=462043847]
 unique_name_in_owner = true
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "MSAA Quality"
 
-[node name="MSAAQualityOptions" type="OptionButton" parent="."]
+[node name="MSAAQualityOptions" type="OptionButton" parent="." unique_id=1007504937]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(70, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 16

@@ -2,18 +2,22 @@
 
 [ext_resource type="Script" uid="uid://b5x6w4qcay248" path="res://settings_menu/components/volumetric_fog.gd" id="1_81rr4"]
 
-[node name="VolumetricFog" type="GridContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="VolumetricFog" type="GridContainer" unique_id=498709570]
+offset_right = 304.0
+offset_bottom = 66.0
 columns = 2
 script = ExtResource("1_81rr4")
 
-[node name="VolumetricFogLabel" type="Label" parent="."]
+[node name="VolumetricFogLabel" type="Label" parent="." unique_id=753321631]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Volumetric Fog"
 
-[node name="VolumetricFogOptions" type="OptionButton" parent="."]
+[node name="VolumetricFogOptions" type="OptionButton" parent="." unique_id=1834480539]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 selected = 0
 item_count = 2
 popup/item_0/text = "Disabled"
@@ -21,12 +25,18 @@ popup/item_0/id = 0
 popup/item_1/text = "Enabled"
 popup/item_1/id = 1
 
-[node name="VolumetricFogFilteringLabel" type="Label" parent="."]
+[node name="VolumetricFogFilteringLabel" type="Label" parent="." unique_id=1669589179]
+visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Fog Smoothing"
 
-[node name="VolumetricFogFilteringOptions" type="OptionButton" parent="."]
+[node name="VolumetricFogFilteringOptions" type="OptionButton" parent="." unique_id=1194277464]
+visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 selected = 0
 item_count = 2
 popup/item_0/text = "Disabled"

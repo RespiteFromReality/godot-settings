@@ -2,23 +2,25 @@
 
 [ext_resource type="Script" uid="uid://ckd3t2432ia3n" path="res://settings_menu/components/window_mode.gd" id="1_jk1pw"]
 
-[node name="WindowMode" type="HBoxContainer"]
+[node name="WindowMode" type="HBoxContainer" unique_id=876994624]
 editor_description = "Allow switching window modes.
 
 Options: Windowed Mode, Borderless Fullscreen, Exclusive Fullscreen."
-offset_right = 40.0
+custom_minimum_size = Vector2(150, 0)
+offset_right = 304.0
 offset_bottom = 40.0
 script = ExtResource("1_jk1pw")
 
-[node name="WindowModeLabel" type="Label" parent="."]
+[node name="WindowModeLabel" type="Label" parent="." unique_id=2052567475]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Window Mode"
 
-[node name="WindowModeButton" type="OptionButton" parent="."]
+[node name="WindowModeButton" type="OptionButton" parent="." unique_id=250039670]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(140, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 16

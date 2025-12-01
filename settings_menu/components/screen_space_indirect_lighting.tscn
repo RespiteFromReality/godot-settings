@@ -2,18 +2,26 @@
 
 [ext_resource type="Script" uid="uid://bqv63n06j76u5" path="res://settings_menu/components/screen_space_indirect_lighting.gd" id="1_lv3hg"]
 
-[node name="ScreenSpaceIndirectLighting" type="GridContainer"]
+[node name="ScreenSpaceIndirectLighting" type="GridContainer" unique_id=333354216]
 editor_description = "Allow toggling Screen-space Indirect Lighting (SSIL) and its quality levels."
+anchors_preset = -1
+anchor_top = 0.031000001
+anchor_bottom = 0.031000001
+offset_top = -33.480003
 offset_right = 199.0
-offset_bottom = 66.0
+offset_bottom = 32.519997
 columns = 2
 script = ExtResource("1_lv3hg")
 
-[node name="SSILLabel" type="Label" parent="."]
+[node name="SSILLabel" type="Label" parent="." unique_id=541897815]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "SSIL"
 
-[node name="SSILOptions" type="OptionButton" parent="."]
+[node name="SSILOptions" type="OptionButton" parent="." unique_id=1077124362]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -22,11 +30,17 @@ popup/item_0/id = 0
 popup/item_1/text = "Enabled"
 popup/item_1/id = 1
 
-[node name="SSILQualityLabel" type="Label" parent="."]
+[node name="SSILQualityLabel" type="Label" parent="." unique_id=545728213]
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "SSIL Quality"
 
-[node name="SSILQualityOptions" type="OptionButton" parent="."]
+[node name="SSILQualityOptions" type="OptionButton" parent="." unique_id=2123817402]
+visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 selected = 0
 item_count = 5

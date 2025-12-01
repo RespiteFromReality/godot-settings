@@ -3,19 +3,27 @@
 [ext_resource type="Script" uid="uid://d02v3dg8ef5rh" path="res://settings_menu/components/fov.gd" id="1_mklly"]
 [ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="1_wti4f"]
 
-[node name="FOV" type="HBoxContainer"]
+[node name="FOV" type="HBoxContainer" unique_id=2121656551]
 editor_description = "Allows adjusting the Camera FOV."
-offset_right = 416.0
-offset_bottom = 23.0
-script = ExtResource("1_mklly")
-
-[node name="FOVLabel" type="Label" parent="."]
-layout_mode = 2
+anchors_preset = -1
+anchor_top = 0.011000001
+anchor_right = 0.165
+anchor_bottom = 0.011000001
+offset_top = -11.880001
+offset_right = -0.8000183
+offset_bottom = 12.119999
+grow_horizontal = 2
 size_flags_horizontal = 3
+script = ExtResource("1_mklly")
+metadata/_edit_use_anchors_ = true
+
+[node name="FOVLabel" type="Label" parent="." unique_id=430605040]
+layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 16
 text = "FOV"
 
-[node name="FOV" parent="." instance=ExtResource("1_wti4f")]
+[node name="FOV" parent="." unique_id=1210681770 instance=ExtResource("1_wti4f")]
 layout_mode = 2
 rounded = true
 min_value = 60.0

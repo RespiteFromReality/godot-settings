@@ -3,18 +3,22 @@
 [ext_resource type="Script" uid="uid://bwxht0kk4rfnb" path="res://settings_menu/components/global_illumination.gd" id="1_axfeq"]
 [ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="2_6q6ie"]
 
-[node name="GlobalIllumination" type="GridContainer"]
-offset_right = 532.0
-offset_bottom = 120.0
+[node name="GlobalIllumination" type="GridContainer" unique_id=1742255460]
+offset_right = 434.0
+offset_bottom = 164.0
 columns = 2
 script = ExtResource("1_axfeq")
 
-[node name="GILabel" type="Label" parent="."]
+[node name="GILabel" type="Label" parent="." unique_id=440809981]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Global Illumination"
 
-[node name="GIOptions" type="OptionButton" parent="."]
+[node name="GIOptions" type="OptionButton" parent="." unique_id=727470437]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 selected = 0
 item_count = 3
 popup/item_0/text = "Disabled"
@@ -24,12 +28,16 @@ popup/item_1/id = 1
 popup/item_2/text = "SDFGI"
 popup/item_2/id = 2
 
-[node name="GIResolutionLabel" type="Label" parent="."]
+[node name="GIResolutionLabel" type="Label" parent="." unique_id=1154418072]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "GI Resolution"
 
-[node name="GIResolutionOption" type="OptionButton" parent="."]
+[node name="GIResolutionOption" type="OptionButton" parent="." unique_id=1320821891]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 selected = 0
 item_count = 2
 popup/item_0/text = "Half"
@@ -37,12 +45,14 @@ popup/item_0/id = 0
 popup/item_1/text = "Full"
 popup/item_1/id = 1
 
-[node name="SDFGICascadesLabel" type="Label" parent="."]
+[node name="SDFGICascadesLabel" type="Label" parent="." unique_id=1453070135]
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 text = "SDFGI Cascades"
 
-[node name="SDFGICascadesSlider" parent="." instance=ExtResource("2_6q6ie")]
+[node name="SDFGICascadesSlider" parent="." unique_id=1417323006 instance=ExtResource("2_6q6ie")]
 visible = false
 layout_mode = 2
 rounded = true
@@ -51,14 +61,17 @@ max_value = 8.0
 value = 1.0
 decimals_padding = 0
 
-[node name="SDFGIProbeRaysLabel" type="Label" parent="."]
+[node name="SDFGIProbeRaysLabel" type="Label" parent="." unique_id=50612288]
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "SDFGI Ray Count"
 
-[node name="SDFGIProbeRaysOptions" type="OptionButton" parent="."]
+[node name="SDFGIProbeRaysOptions" type="OptionButton" parent="." unique_id=720800102]
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 selected = 1
 item_count = 7
 popup/item_0/text = "4"
@@ -76,14 +89,17 @@ popup/item_5/id = 5
 popup/item_6/text = "128"
 popup/item_6/id = 6
 
-[node name="VoxelGIQualityLabel" type="Label" parent="."]
+[node name="VoxelGIQualityLabel" type="Label" parent="." unique_id=1222881609]
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "VoxelGI Quality"
 
-[node name="VoxelGIQualityOptions" type="OptionButton" parent="."]
+[node name="VoxelGIQualityOptions" type="OptionButton" parent="." unique_id=1224957904]
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 selected = 0
 item_count = 2
 popup/item_0/text = "Low"

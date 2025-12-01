@@ -2,17 +2,24 @@
 
 [ext_resource type="Script" uid="uid://di7gv3to71huk" path="res://settings_menu/components/screen_space_ambient_occlusion.gd" id="1_7nkaw"]
 
-[node name="ScreenSpaceAmbientOcclusion" type="GridContainer"]
+[node name="ScreenSpaceAmbientOcclusion" type="GridContainer" unique_id=1179433423]
+anchors_preset = -1
+anchor_top = 0.031000001
+anchor_bottom = 0.031000001
+offset_top = -33.480003
 offset_right = 328.0
-offset_bottom = 93.0
+offset_bottom = 32.519997
 columns = 2
 script = ExtResource("1_7nkaw")
 
-[node name="SSAOLabel" type="Label" parent="."]
+[node name="SSAOLabel" type="Label" parent="." unique_id=328615962]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "SSAO"
 
-[node name="SSAOOptions" type="OptionButton" parent="."]
+[node name="SSAOOptions" type="OptionButton" parent="." unique_id=775756234]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -21,13 +28,16 @@ popup/item_0/id = 0
 popup/item_1/text = "Enabled"
 popup/item_1/id = 1
 
-[node name="SSAOQualityLabel" type="Label" parent="."]
+[node name="SSAOQualityLabel" type="Label" parent="." unique_id=2052137029]
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "SSAO Quality"
 
-[node name="SSAOQualityOptions" type="OptionButton" parent="."]
+[node name="SSAOQualityOptions" type="OptionButton" parent="." unique_id=1865053423]
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 selected = 0
 item_count = 5

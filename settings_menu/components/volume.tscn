@@ -3,70 +3,71 @@
 [ext_resource type="Script" uid="uid://dakoiv53g0jx" path="res://settings_menu/components/volume.gd" id="1_ij7rm"]
 [ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="1_n0dvm"]
 
-[node name="VolumeControls" type="GridContainer"]
+[node name="VolumeControls" type="GridContainer" unique_id=1087057508]
+size_flags_horizontal = 3
 columns = 2
 script = ExtResource("1_ij7rm")
 
-[node name="MasterVolumeLabel" type="Label" parent="."]
+[node name="MasterVolumeLabel" type="Label" parent="." unique_id=692337140]
 layout_mode = 2
 text = "Master"
 
-[node name="MasterVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+[node name="MasterVolumeSlider" parent="." unique_id=824189 instance=ExtResource("1_n0dvm")]
 layout_mode = 2
 rounded = true
 value = 100.0
 decimals_padding = 0
 suffix = "%"
 
-[node name="MusicVolumeLabel" type="Label" parent="."]
+[node name="MusicVolumeLabel" type="Label" parent="." unique_id=1711689350]
 layout_mode = 2
 text = "Music"
 
-[node name="MusicVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+[node name="MusicVolumeSlider" parent="." unique_id=419807022 instance=ExtResource("1_n0dvm")]
 layout_mode = 2
 rounded = true
 value = 100.0
 decimals_padding = 0
 suffix = "%"
 
-[node name="EffectsVolumeLabel" type="Label" parent="."]
+[node name="EffectsVolumeLabel" type="Label" parent="." unique_id=1296484991]
 layout_mode = 2
 text = "Effects"
 
-[node name="EffectsVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+[node name="EffectsVolumeSlider" parent="." unique_id=754050643 instance=ExtResource("1_n0dvm")]
 layout_mode = 2
 rounded = true
 value = 100.0
 decimals_padding = 0
 suffix = "%"
 
-[node name="AmbientVolumeLabel" type="Label" parent="."]
+[node name="AmbientVolumeLabel" type="Label" parent="." unique_id=1672117061]
 layout_mode = 2
 text = "Ambient"
 
-[node name="AmbientVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+[node name="AmbientVolumeSlider" parent="." unique_id=103329375 instance=ExtResource("1_n0dvm")]
 layout_mode = 2
 rounded = true
 value = 100.0
 decimals_padding = 0
 suffix = "%"
 
-[node name="VoiceVolumeLabel" type="Label" parent="."]
+[node name="VoiceVolumeLabel" type="Label" parent="." unique_id=124261198]
 layout_mode = 2
 text = "Voice"
 
-[node name="VoiceVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+[node name="VoiceVolumeSlider" parent="." unique_id=511116698 instance=ExtResource("1_n0dvm")]
 layout_mode = 2
 rounded = true
 value = 100.0
 decimals_padding = 0
 suffix = "%"
 
-[node name="UIVolumeLabel" type="Label" parent="."]
+[node name="UIVolumeLabel" type="Label" parent="." unique_id=1968563392]
 layout_mode = 2
 text = "UI"
 
-[node name="UIVolumeSlider" parent="." instance=ExtResource("1_n0dvm")]
+[node name="UIVolumeSlider" parent="." unique_id=441886970 instance=ExtResource("1_n0dvm")]
 layout_mode = 2
 rounded = true
 value = 100.0

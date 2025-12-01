@@ -8,11 +8,15 @@ offset_bottom = 40.0
 script = ExtResource("1_l5ej3")
 
 [node name="BloomLabel" type="Label" parent="." unique_id=905186205]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Bloom"
 
 [node name="BloomOptions" type="OptionButton" parent="." unique_id=934012058]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 8
 selected = 0
 item_count = 3
 popup/item_0/text = "Disabled"
