@@ -88,7 +88,7 @@ func set_label_value(_value: float) -> void:
 	if _value == 0 && zero_means_disabled == true:
 		label.text = "Disabled"
 	else:
-		label.text = str(_value).pad_decimals(decimals_padding) + " " + suffix
+		label.text = str(_value).pad_decimals(decimals_padding) + suffix
 
 
 # Signals
