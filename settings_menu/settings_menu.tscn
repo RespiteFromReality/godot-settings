@@ -1,0 +1,218 @@
+[gd_scene load_steps=17 format=3 uid="uid://dd8pt6she48ej"]
+
+[ext_resource type="Theme" uid="uid://c2ecss6cotlob" path="res://settings_menu/theme.tres" id="1_vlimw"]
+[ext_resource type="PackedScene" uid="uid://cogtcpe66g1a7" path="res://settings_menu/components/fov.tscn" id="2_03olj"]
+[ext_resource type="PackedScene" uid="uid://dsknd4j07qbrd" path="res://settings_menu/components/window_mode.tscn" id="2_hykgq"]
+[ext_resource type="PackedScene" uid="uid://bxguaf5yxtpk5" path="res://settings_menu/components/vsync_and_fps_limiter.tscn" id="3_s821r"]
+[ext_resource type="PackedScene" uid="uid://7sm7mretevd4" path="res://settings_menu/components/upscaling.tscn" id="5_fe0rv"]
+[ext_resource type="PackedScene" uid="uid://r3boq43ae4w" path="res://settings_menu/components/adjustments.tscn" id="6_fe0rv"]
+[ext_resource type="PackedScene" uid="uid://df1ws3gkkbapr" path="res://settings_menu/components/anti_aliasing.tscn" id="6_r4dkt"]
+[ext_resource type="PackedScene" uid="uid://4ey10g4dv4lq" path="res://settings_menu/components/volume.tscn" id="7_cv3a6"]
+[ext_resource type="PackedScene" uid="uid://cm5yeengm2u3h" path="res://settings_menu/components/volumetric_fog.tscn" id="7_nnd8l"]
+[ext_resource type="PackedScene" uid="uid://d1r0rlh6kci32" path="res://settings_menu/components/lod_threshold.tscn" id="7_pwg8n"]
+[ext_resource type="PackedScene" uid="uid://bw8yep4bsn48u" path="res://settings_menu/components/shadows.tscn" id="8_pfr73"]
+[ext_resource type="PackedScene" uid="uid://dbflr35hkbbsi" path="res://settings_menu/components/screen_space_reflections.tscn" id="9_wvj6e"]
+[ext_resource type="PackedScene" uid="uid://cj7daxvjfmrd" path="res://settings_menu/components/screen_space_indirect_lighting.tscn" id="10_pwg8n"]
+[ext_resource type="PackedScene" uid="uid://bsdr5wdmpy5pg" path="res://settings_menu/components/global_illumination.tscn" id="11_fhjgd"]
+[ext_resource type="PackedScene" uid="uid://bdnli8g4ow2tm" path="res://settings_menu/components/screen_space_ambient_occlusion.tscn" id="11_r4dkt"]
+[ext_resource type="PackedScene" uid="uid://bwtsjms3ni4ip" path="res://settings_menu/components/bloom.tscn" id="14_pjsmy"]
+
+[node name="SettingsMenu2" type="Control" unique_id=872930122]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_vlimw")
+
+[node name="Background" type="Panel" parent="." unique_id=1799079969]
+layout_mode = 0
+offset_top = -324.0
+offset_right = 498.0
+offset_bottom = 324.0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1338591790]
+layout_mode = 0
+offset_top = -324.0
+offset_right = 498.0
+offset_bottom = 324.0
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=1417397730]
+layout_mode = 2
+current_tab = 1
+
+[node name="Game" type="Control" parent="MarginContainer/TabContainer" unique_id=579158567]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Game" unique_id=593712412]
+layout_mode = 0
+offset_right = 482.0
+offset_bottom = 601.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TabContainer/Game/MarginContainer" unique_id=1543499493]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Game/MarginContainer/ScrollContainer" unique_id=676183936]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FOV" parent="MarginContainer/TabContainer/Game/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1109537688 instance=ExtResource("2_03olj")]
+layout_mode = 2
+
+[node name="Display" type="Control" parent="MarginContainer/TabContainer" unique_id=2043272656]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Display" unique_id=1889808074]
+layout_mode = 0
+offset_right = 481.0
+offset_bottom = 601.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TabContainer/Display/MarginContainer" unique_id=1990876850]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer" unique_id=294767574]
+layout_mode = 2
+
+[node name="WindowMode" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1547062067 instance=ExtResource("2_hykgq")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding" type="Control" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1523902359]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="VSyncAndFPSLimit" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1403463035 instance=ExtResource("3_s821r")]
+layout_mode = 2
+
+[node name="Padding2" type="Control" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer/VBoxContainer" unique_id=180681571]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Upscaling" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer/VBoxContainer" unique_id=807916144 instance=ExtResource("5_fe0rv")]
+layout_mode = 2
+
+[node name="Padding4" type="Control" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1982576537]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="AntiAliasing" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer/VBoxContainer" unique_id=861452256 instance=ExtResource("6_r4dkt")]
+layout_mode = 2
+
+[node name="Padding3" type="Control" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer/VBoxContainer" unique_id=327808040]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Adjustments" parent="MarginContainer/TabContainer/Display/MarginContainer/ScrollContainer/VBoxContainer" unique_id=472143592 instance=ExtResource("6_fe0rv")]
+layout_mode = 2
+
+[node name="Graphics" type="Control" parent="MarginContainer/TabContainer" unique_id=694432109]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Graphics" unique_id=532899943]
+layout_mode = 0
+offset_right = 482.0
+offset_bottom = 601.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TabContainer/Graphics/MarginContainer" unique_id=18866121]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer" unique_id=284908179]
+layout_mode = 2
+
+[node name="LODTreshhold" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=950572642 instance=ExtResource("7_pwg8n")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1098668407]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="ScreenSpaceIndirectLighting" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1600688779 instance=ExtResource("10_pwg8n")]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1632608042]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="ScreenSpaceReflections" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=536227182 instance=ExtResource("9_wvj6e")]
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1276881738]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="ScreenSpaceAmbientOcclusion" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=160522310 instance=ExtResource("11_r4dkt")]
+layout_mode = 2
+
+[node name="Control4" type="Control" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=473303285]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="GlobalIllumination" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=392927627 instance=ExtResource("11_fhjgd")]
+layout_mode = 2
+
+[node name="Control5" type="Control" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=2008641818]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Shadows" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=109173263 instance=ExtResource("8_pfr73")]
+layout_mode = 2
+
+[node name="Control6" type="Control" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1380776839]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="VolumetricFog" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=625235188 instance=ExtResource("7_nnd8l")]
+layout_mode = 2
+
+[node name="Control7" type="Control" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1491502531]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Bloom" parent="MarginContainer/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1611267685 instance=ExtResource("14_pjsmy")]
+layout_mode = 2
+
+[node name="Sound" type="Control" parent="MarginContainer/TabContainer" unique_id=1170763730]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Sound" unique_id=746321355]
+layout_mode = 0
+offset_right = 482.0
+offset_bottom = 601.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TabContainer/Sound/MarginContainer" unique_id=1743704519]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Sound/MarginContainer/ScrollContainer" unique_id=750358345]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VolumeControls" parent="MarginContainer/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1087057508 instance=ExtResource("7_cv3a6")]
+layout_mode = 2
