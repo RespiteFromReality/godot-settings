@@ -4,6 +4,11 @@ extends Node
 enum ANTI_ALIASING { DISABLED, FXAA, SMAA, MSAA, TAA }
 enum GI { DISABLED, VOXELGI, SDFGI}
 
+var viewport_start_size := Vector2(
+	ProjectSettings.get_setting(&"display/window/size/viewport_width"),
+	ProjectSettings.get_setting(&"display/window/size/viewport_height")
+)
+
 func _ready() -> void:
 	load_settings()
 
@@ -115,6 +120,11 @@ func load_settings() -> void:
 	# BLOOM
 	var bloom: int = graphics_get_bloom()
 	graphics_set_bloom(bloom)
+	
+	# UI SCALE
+	var scale: float = ui_get_ui_scale()
+	ui_set_ui_scale(scale)
+
 
 # FOV
 func game_get_fov() -> float:
@@ -425,6 +435,7 @@ func graphics_get_sdfgi_cascades() -> int:
 	var sdfgi_cascades: int = SettingsFiles.get_setting("graphics", "sdfgi_cascades")
 	return sdfgi_cascades
 
+# Between 1 and 8
 func graphics_set_sdfgi_cascades(cascades: int) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
@@ -558,3 +569,15 @@ func audio_set_volume(index: int, volume: float) -> void:
 			SettingsFiles.apply_setting("audio", "voice_volume", adjusted_volume)
 		5:
 			SettingsFiles.apply_setting("audio", "ui_volume", adjusted_volume)
+
+## UI
+
+func ui_get_ui_scale() -> float:
+	var scale: float = SettingsFiles.get_setting("ui", "scale")
+	return scale
+
+func ui_set_ui_scale(scale: float) -> void:
+	var new_size := viewport_start_size
+	new_size *= scale
+	get_tree().root.set_content_scale_size(new_size)
+	SettingsFiles.apply_setting("ui", "scale", scale)

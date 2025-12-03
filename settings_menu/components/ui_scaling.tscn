@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://djgw7pir3pjol"]
+
+[ext_resource type="Script" uid="uid://ctqqiugw0al3" path="res://settings_menu/components/ui_scaling.gd" id="1_r8r2d"]
+[ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="2_hsyud"]
+
+[node name="UIScaling" type="Control" unique_id=1951421922]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+script = ExtResource("1_r8r2d")
+
+[node name="UIScalingLabel" type="Label" parent="." unique_id=394911397]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 31.0
+text = "UI Scaling"
+vertical_alignment = 1
+
+[node name="UIScalingOptions" type="OptionButton" parent="." unique_id=734239901]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_left = 150.0
+offset_right = 300.0
+offset_bottom = 31.0
+selected = 2
+item_count = 5
+popup/item_0/text = "66%"
+popup/item_0/id = 0
+popup/item_1/text = "80%"
+popup/item_1/id = 1
+popup/item_2/text = "100%"
+popup/item_2/id = 2
+popup/item_3/text = "133%"
+popup/item_3/id = 3
+popup/item_4/text = "200%"
+popup/item_4/id = 4
+
+[node name="UIScalingSlider" parent="." unique_id=1349058281 instance=ExtResource("2_hsyud")]
+visible = false
+layout_mode = 1
+offset_left = 150.0
+offset_top = 0.0
+offset_right = 430.0
+offset_bottom = 24.0
+rounded = true
+min_value = 10.0
+max_value = 200.0
+value = 100.0
+decimals_padding = 0
+suffix = "%"
+
+[connection signal="item_selected" from="UIScalingOptions" to="." method="_on_ui_scaling_options_item_selected"]
+[connection signal="slider_value_changed" from="UIScalingSlider" to="." method="_on_ui_scaling_slider_slider_value_changed"]

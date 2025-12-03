@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dd8pt6she48ej"]
+[gd_scene load_steps=18 format=3 uid="uid://dd8pt6she48ej"]
 
 [ext_resource type="Theme" uid="uid://c2ecss6cotlob" path="res://settings_menu/theme.tres" id="1_vlimw"]
 [ext_resource type="PackedScene" uid="uid://cogtcpe66g1a7" path="res://settings_menu/components/fov.tscn" id="2_03olj"]
@@ -16,8 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://bsdr5wdmpy5pg" path="res://settings_menu/components/global_illumination.tscn" id="11_fhjgd"]
 [ext_resource type="PackedScene" uid="uid://bdnli8g4ow2tm" path="res://settings_menu/components/screen_space_ambient_occlusion.tscn" id="11_r4dkt"]
 [ext_resource type="PackedScene" uid="uid://bwtsjms3ni4ip" path="res://settings_menu/components/bloom.tscn" id="14_pjsmy"]
+[ext_resource type="PackedScene" uid="uid://djgw7pir3pjol" path="res://settings_menu/components/ui_scaling.tscn" id="17_fhjgd"]
 
-[node name="SettingsMenu2" type="Control" unique_id=872930122]
+[node name="SettingsMenu" type="Control" unique_id=872930122]
 layout_mode = 3
 anchors_preset = 4
 anchor_top = 0.5
@@ -40,7 +41,8 @@ offset_bottom = 324.0
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=1417397730]
 layout_mode = 2
-current_tab = 1
+tab_alignment = 1
+current_tab = 4
 
 [node name="Game" type="Control" parent="MarginContainer/TabContainer" unique_id=579158567]
 visible = false
@@ -68,6 +70,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="Display" type="Control" parent="MarginContainer/TabContainer" unique_id=2043272656]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -215,4 +218,28 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VolumeControls" parent="MarginContainer/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1087057508 instance=ExtResource("7_cv3a6")]
+layout_mode = 2
+
+[node name="UI" type="Control" parent="MarginContainer/TabContainer" unique_id=446433427]
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/UI" unique_id=1853989035]
+layout_mode = 0
+offset_right = 482.0
+offset_bottom = 601.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TabContainer/UI/MarginContainer" unique_id=164658110]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/UI/MarginContainer/ScrollContainer" unique_id=2068779964]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UIScaling" parent="MarginContainer/TabContainer/UI/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1951421922 instance=ExtResource("17_fhjgd")]
 layout_mode = 2

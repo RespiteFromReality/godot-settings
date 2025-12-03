@@ -82,6 +82,8 @@ func create_defaults() -> void:
 	new_config.set_value("audio", "voice_volume", 1.0)
 	new_config.set_value("audio", "ui_volume", 1.0)
 	
+	new_config.set_value("ui", "scale", 1.0)
+	
 	new_config.save(DEFAULT_SETTINGS_FILE_PATH)
 
 
