@@ -113,7 +113,7 @@ func load_settings() -> void:
 	graphics_set_shadow_filtering_positional(filtering)
 	
 	# BLOOM
-	var bloom: int = Settings.graphics_get_bloom()
+	var bloom: int = graphics_get_bloom()
 	graphics_set_bloom(bloom)
 
 # FOV
