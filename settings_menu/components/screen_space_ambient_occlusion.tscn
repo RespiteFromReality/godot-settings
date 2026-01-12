@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdnli8g4ow2tm"]
+[gd_scene format=3 uid="uid://bdnli8g4ow2tm"]
 
 [ext_resource type="Script" uid="uid://di7gv3to71huk" path="res://settings_menu/components/screen_space_ambient_occlusion.gd" id="1_7nkaw"]
 

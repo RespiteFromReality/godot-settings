@@ -7,14 +7,14 @@ extends Control
 
 func _ready() -> void:
 	#AA
-	var anti_aliasing: int = Settings.display_get_antialiasing()
+	var anti_aliasing: int = Settings.get_antialiasing()
 	aa_option_button.set_block_signals(true)
 	aa_option_button.select(anti_aliasing)
 	aa_option_button.set_block_signals(false)
 	toggle_msaa_submenu(anti_aliasing)
 
 	#MSAA
-	var msaa_quality: int = Settings.display_get_msaa_quality()
+	var msaa_quality: int = Settings.get_msaa_quality()
 	msaa_quality_options.set_block_signals(true)
 	match msaa_quality:
 		2: msaa_quality_options.select(0)
@@ -35,12 +35,12 @@ func toggle_msaa_submenu(index: int) -> void:
 func _on_aa_option_button_item_selected(index: int) -> void:
 	toggle_msaa_submenu(index)
 	match index:
-		0: Settings.display_set_antialiasing(Settings.ANTI_ALIASING.DISABLED)
-		1: Settings.display_set_antialiasing(Settings.ANTI_ALIASING.FXAA)
-		2: Settings.display_set_antialiasing(Settings.ANTI_ALIASING.SMAA)
-		3: Settings.display_set_antialiasing(Settings.ANTI_ALIASING.MSAA)
-		4: Settings.display_set_antialiasing(Settings.ANTI_ALIASING.TAA)
+		0: Settings.set_antialiasing(Settings.ANTI_ALIASING.DISABLED)
+		1: Settings.set_antialiasing(Settings.ANTI_ALIASING.FXAA)
+		2: Settings.set_antialiasing(Settings.ANTI_ALIASING.SMAA)
+		3: Settings.set_antialiasing(Settings.ANTI_ALIASING.MSAA)
+		4: Settings.set_antialiasing(Settings.ANTI_ALIASING.TAA)
 
 
 func _on_msaa_quality_options_item_selected(index: int) -> void:
-	Settings.display_set_msaa_quality(index)
+	Settings.set_msaa_quality(index)

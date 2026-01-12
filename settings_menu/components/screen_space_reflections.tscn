@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbflr35hkbbsi"]
+[gd_scene format=3 uid="uid://dbflr35hkbbsi"]
 
 [ext_resource type="Script" uid="uid://crimggkb8irum" path="res://settings_menu/components/screen_space_reflections.gd" id="1_ds2ss"]
 [ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="2_mdj25"]

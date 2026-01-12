@@ -4,7 +4,7 @@ extends Control
 
 
 func _ready() -> void:
-	var mode: int = Settings.display_get_window_mode()
+	var mode: int = Settings.get_window_mode()
 	window_mode_button.set_block_signals(true)
 	match mode:
 		0:
@@ -20,8 +20,8 @@ func _ready() -> void:
 func _on_window_mode_button_item_selected(index: int) -> void:
 	match index:
 		0:
-			Settings.display_set_window_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			Settings.set_window_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		1:
-			Settings.display_set_window_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			Settings.set_window_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		2:
-			Settings.display_set_window_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+			Settings.set_window_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)

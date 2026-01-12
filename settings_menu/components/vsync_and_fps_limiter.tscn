@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxguaf5yxtpk5"]
+[gd_scene format=3 uid="uid://bxguaf5yxtpk5"]
 
 [ext_resource type="Script" uid="uid://ctkra6qy5jlaf" path="res://settings_menu/components/vsync_and_fps_limiter.gd" id="1_12ib5"]
 [ext_resource type="Script" uid="uid://d270vtwfidiph" path="res://settings_menu/components/toggleable_label/toggleable_label.gd" id="2_73anq"]

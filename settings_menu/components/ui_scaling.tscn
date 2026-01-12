@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://djgw7pir3pjol"]
+[gd_scene format=3 uid="uid://djgw7pir3pjol"]
 
 [ext_resource type="Script" uid="uid://ctqqiugw0al3" path="res://settings_menu/components/ui_scaling.gd" id="1_r8r2d"]
 [ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="2_hsyud"]

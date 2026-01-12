@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bw8yep4bsn48u"]
+[gd_scene format=3 uid="uid://bw8yep4bsn48u"]
 
 [ext_resource type="Script" uid="uid://dns5s81tbthkv" path="res://settings_menu/components/shadows.gd" id="1_68s2d"]
 

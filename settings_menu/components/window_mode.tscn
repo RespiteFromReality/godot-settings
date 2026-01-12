@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsknd4j07qbrd"]
+[gd_scene format=3 uid="uid://dsknd4j07qbrd"]
 
 [ext_resource type="Script" uid="uid://ckd3t2432ia3n" path="res://settings_menu/components/window_mode.gd" id="1_jk1pw"]
 

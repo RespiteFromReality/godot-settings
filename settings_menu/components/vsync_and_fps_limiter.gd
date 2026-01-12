@@ -9,14 +9,14 @@ const color_white = Color.WHITE
 
 
 func _ready() -> void:
-	var vsync_index: int = Settings.display_get_vsync_mode()
+	var vsync_index: int = Settings.get_vsync_mode()
 	vsync.set_block_signals(true)
 	vsync.select(vsync_index)
 	vsync.set_block_signals(false)
 	if (vsync_index != 0):
 		toggle_fps_limiter(false)
 
-	var max_fps: int = Settings.display_get_max_fps()
+	var max_fps: int = Settings.get_max_fps()
 	fps_limit_slider.set_block_signals(true)
 	fps_limit_slider.set_value(max_fps)
 	fps_limit_slider.set_block_signals(false)
@@ -32,20 +32,20 @@ func _on_vsync_item_selected(index: int) -> void:
 	match index:
 		0: # Disabled (uses Engine.max_fps)
 			toggle_fps_limiter(true)
-			Settings.display_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+			Settings.set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		1: # Adaptive V-sync: Framerate is limited by the monitor refresh rate. (ignores Engine.max_fps)
 			toggle_fps_limiter(false)
-			Settings.display_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+			Settings.set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 		2: # Enabled V-sync: Framerate is limited by the monitor refresh rate. (ignores Engine.max_fps)
 			toggle_fps_limiter(false)
-			Settings.display_set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
+			Settings.set_vsync_mode(DisplayServer.VSYNC_ADAPTIVE)
 
 
 # To ensure smooth sliding, when the drag starts we set the FPS to 60.
 func _on_fps_limit_slider_drag_started() -> void:
-	Settings.display_set_max_fps(60)
+	Settings.set_max_fps(60)
 
 
 func _on_fps_limit_slider_drag_ended(value: int) -> void:
 	var max_fps: int = value
-	Settings.display_set_max_fps(max_fps)
+	Settings.set_max_fps(max_fps)

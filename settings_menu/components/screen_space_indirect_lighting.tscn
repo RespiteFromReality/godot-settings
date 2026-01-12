@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cj7daxvjfmrd"]
+[gd_scene format=3 uid="uid://cj7daxvjfmrd"]
 
 [ext_resource type="Script" uid="uid://bqv63n06j76u5" path="res://settings_menu/components/screen_space_indirect_lighting.gd" id="1_lv3hg"]
 

@@ -2,7 +2,9 @@ extends Node
 
 # ANTIALIASING
 enum ANTI_ALIASING { DISABLED, FXAA, SMAA, MSAA, TAA }
+enum MSAA { x2, x4, x8 }
 enum GI { DISABLED, VOXELGI, SDFGI}
+enum SHADOW_RESOLUTION { x512, x1024, x2048, x4096, x8192 }
 
 var viewport_start_size := Vector2(
 	ProjectSettings.get_setting(&"display/window/size/viewport_width"),
@@ -18,39 +20,39 @@ func load_settings() -> void:
 	## GAME
 	#FOV
 	var fov: float = SettingsFiles.get_setting("game", "fov")
-	game_set_fov(fov)
+	set_fov(fov)
 	
 	## DISPLAY
 	# WINDOW MODE
 	var window_mode: DisplayServer.WindowMode = SettingsFiles.get_setting("display", "window_mode")
-	display_set_window_mode(window_mode)
+	set_window_mode(window_mode)
 	
 	# VSYNC
 	var vsync_mode: DisplayServer.VSyncMode =  SettingsFiles.get_setting("display", "vsync_mode")
-	display_set_vsync_mode(vsync_mode)
+	set_vsync_mode(vsync_mode)
 	
 	# FPS LIMIT
 	var max_fps: int = SettingsFiles.get_setting("display", "max_fps")
-	display_set_max_fps(max_fps)
+	set_max_fps(max_fps)
 	
 	# ANTI-ALIASING
 	var anti_aliasing: ANTI_ALIASING = SettingsFiles.get_setting("display", "anti_aliasing")
-	display_set_antialiasing(anti_aliasing)
+	set_antialiasing(anti_aliasing)
 	
 	# UPSCALER
 	var upscaler: int = SettingsFiles.get_setting("display", "upscaler")
-	display_set_upscaler(upscaler)
+	set_upscaler(upscaler)
 	
 	if upscaler == 0:
 		# RENDER SCALE
 		var render_scale: float = SettingsFiles.get_setting('display', "render_scale")
-		display_set_render_scale(render_scale)
+		set_render_scale(render_scale)
 	else:
 		# FSR
 		var sharpness: float = SettingsFiles.get_setting("display", "fsr_sharpness")
 		var quality: float = SettingsFiles.get_setting("display", "fsr_quality")
-		display_set_fsr_sharpness(sharpness)
-		display_set_fsr_quality(quality)
+		set_fsr_sharpness(sharpness)
+		set_fsr_quality(quality)
 	
 	
 	# ADJUSTMENTS
@@ -60,79 +62,79 @@ func load_settings() -> void:
 		var brightness: float = SettingsFiles.get_setting("display", "brightness")
 		var contrast: float = SettingsFiles.get_setting("display", "contrast")
 		var saturation: float = SettingsFiles.get_setting("display", "saturation")
-		display_set_brightness(brightness)
-		display_set_contrast(contrast)
-		display_set_saturation(saturation)
+		set_brightness(brightness)
+		set_contrast(contrast)
+		set_saturation(saturation)
 	
 	## GRAPHICS
 	# LOD THRESHOLD
-	var threshold: float = SettingsFiles.get_setting("graphics", "lod_threshold")
-	graphics_set_lod_threshold(threshold)
+	var threshold: float = SettingsFiles.get_setting("rendering", "lod_threshold")
+	set_lod_threshold(threshold)
 	
 	# SSIL
-	var ssil: bool = SettingsFiles.get_setting("graphics", "ssil")
-	graphics_set_ssil(ssil)
-	var ssil_quality: RenderingServer.EnvironmentSSILQuality = SettingsFiles.get_setting("graphics", "ssil_quality")
-	graphics_set_ssil_quality(ssil_quality)
+	var ssil: bool = SettingsFiles.get_setting("rendering", "ssil")
+	set_ssil(ssil)
+	var ssil_quality: RenderingServer.EnvironmentSSILQuality = SettingsFiles.get_setting("rendering", "ssil_quality")
+	set_ssil_quality(ssil_quality)
 	
 	# SSR
-	var ssr: bool = SettingsFiles.get_setting("graphics", "ssr")
-	graphics_set_ssr(ssr)
-	var ssr_steps: int = SettingsFiles.get_setting("graphics", "ssr_steps")
-	graphics_set_ssr_steps(ssr_steps)
+	var ssr: bool = SettingsFiles.get_setting("rendering", "ssr")
+	set_ssr(ssr)
+	var ssr_steps: int = SettingsFiles.get_setting("rendering", "ssr_steps")
+	set_ssr_steps(ssr_steps)
 	
 	# SSAO
-	var ssao: bool = SettingsFiles.get_setting("graphics", "ssao")
-	graphics_set_ssao(ssao)
-	var ssao_quality: RenderingServer.EnvironmentSSAOQuality = SettingsFiles.get_setting("graphics", "ssao_quality")
-	graphics_set_ssao_quality(ssao_quality)
+	var ssao: bool = SettingsFiles.get_setting("rendering", "ssao")
+	set_ssao(ssao)
+	var ssao_quality: RenderingServer.EnvironmentSSAOQuality = SettingsFiles.get_setting("rendering", "ssao_quality")
+	set_ssao_quality(ssao_quality)
 	
 	# GLOBAL ILLUMINATION
-	var gi: GI = SettingsFiles.get_setting("graphics", "gi")
-	graphics_set_gi(gi)
-	var gi_res: bool = SettingsFiles.get_setting("graphics", "gi_half_res")
-	graphics_set_gi_resolution(gi_res)
+	var gi: GI = SettingsFiles.get_setting("rendering", "gi")
+	set_gi(gi)
+	var gi_res: bool = SettingsFiles.get_setting("rendering", "gi_half_res")
+	set_gi_resolution(gi_res)
 	
 	# SDFGI
-	var sdfgi_cascades: int = SettingsFiles.get_setting("graphics", "sdfgi_cascades")
-	graphics_set_sdfgi_cascades(sdfgi_cascades)
-	var sdfgi_rays: RenderingServer.EnvironmentSDFGIRayCount = SettingsFiles.get_setting("graphics", "sdfgi_rays")
-	graphics_set_sdfgi_rays(sdfgi_rays)
+	var sdfgi_cascades: int = SettingsFiles.get_setting("rendering", "sdfgi_cascades")
+	set_sdfgi_cascades(sdfgi_cascades)
+	var sdfgi_rays: RenderingServer.EnvironmentSDFGIRayCount = SettingsFiles.get_setting("rendering", "sdfgi_rays")
+	set_sdfgi_rays(sdfgi_rays)
 	
 	# VOXELGI
-	var voxelgi_quality: RenderingServer.VoxelGIQuality = SettingsFiles.get_setting("graphics", "voxelgi_quality")
-	graphics_set_voxelgi_quality(voxelgi_quality)
+	var voxelgi_quality: RenderingServer.VoxelGIQuality = SettingsFiles.get_setting("rendering", "voxelgi_quality")
+	set_voxelgi_quality(voxelgi_quality)
 	
 	# VOLUMETRIC FOG
-	var volumetric_fog: bool = SettingsFiles.get_setting("graphics", "volumetric_fog")
-	graphics_set_volumetric_fog(volumetric_fog)
-	var volumetric_fog_filtering: bool = SettingsFiles.get_setting("graphics", "volumetric_fog_filtering")
-	graphics_set_volumetric_fog_filtering(volumetric_fog_filtering)
+	var volumetric_fog: bool = SettingsFiles.get_setting("rendering", "volumetric_fog")
+	set_volumetric_fog(volumetric_fog)
+	var volumetric_fog_filtering: bool = SettingsFiles.get_setting("rendering", "volumetric_fog_filtering")
+	set_volumetric_fog_filtering(volumetric_fog_filtering)
 	
 	# SHADOWS
-	var resolution: int = Settings.graphics_get_shadow_resolution_directional()
-	graphics_set_shadow_resolution_directional(resolution)
-	graphics_set_shadow_resolution_positional(resolution)
-	var filtering: RenderingServer.ShadowQuality = Settings.graphics_get_shadow_filtering_directional()
-	graphics_set_shadow_filtering_directional(filtering)
-	graphics_set_shadow_filtering_positional(filtering)
+	var resolution: int = Settings.get_shadow_resolution_directional()
+	set_shadow_resolution_directional(resolution)
+	set_shadow_resolution_positional(resolution)
+	var filtering: RenderingServer.ShadowQuality = Settings.get_shadow_filtering_directional()
+	set_shadow_filtering_directional(filtering)
+	set_shadow_filtering_positional(filtering)
 	
 	# BLOOM
-	var bloom: int = graphics_get_bloom()
-	graphics_set_bloom(bloom)
+	var bloom: int = get_bloom()
+	set_bloom(bloom)
 	
 	# UI SCALE
-	var scale: float = ui_get_ui_scale()
-	ui_set_ui_scale(scale)
+	var scale: float = get_ui_scale()
+	set_ui_scale(scale)
 
 
 # FOV
-func game_get_fov() -> float:
+func get_fov() -> float:
 	var fov: float = SettingsFiles.get_setting("game", "fov")
 	return fov
 
 
-func game_set_fov(fov: float) -> void:
+func set_fov(fov: float) -> void:
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	if camera != null:
 		camera.fov = fov
@@ -140,33 +142,34 @@ func game_set_fov(fov: float) -> void:
 
 
 # WINDOW MODE
-func display_get_window_mode() -> int:
+func get_window_mode() -> int:
 	var mode: DisplayServer.WindowMode = SettingsFiles.get_setting("display", "window_mode")
 	return mode
 
 
-func display_set_window_mode(window_mode: DisplayServer.WindowMode) -> void:
+func set_window_mode(window_mode: DisplayServer.WindowMode) -> void:
 	DisplayServer.window_set_mode(window_mode)
 	SettingsFiles.apply_setting("display", "window_mode", window_mode)
 
+
 # VSYNC
-func display_get_vsync_mode() -> int:
+func get_vsync_mode() -> int:
 	var mode: int = SettingsFiles.get_setting("display", "vsync_mode")
 	return mode
 
 
-func display_set_vsync_mode(vsync_mode: DisplayServer.VSyncMode) -> void:
+func set_vsync_mode(vsync_mode: DisplayServer.VSyncMode) -> void:
 	DisplayServer.window_set_vsync_mode(vsync_mode)
 	SettingsFiles.apply_setting("display", "vsync_mode", vsync_mode)
 
 
 # FPS LIMIT
-func display_get_max_fps() -> int:
+func get_max_fps() -> int:
 	var max_fps: int = SettingsFiles.get_setting("display", "max_fps")
 	return max_fps
 
 
-func display_set_max_fps(max_fps: int) -> void:
+func set_max_fps(max_fps: int) -> void:
 	# The maximum number of frames per second that can be rendered.
 	# A value of 0 means "no limit".
 	Engine.max_fps = max_fps
@@ -174,12 +177,12 @@ func display_set_max_fps(max_fps: int) -> void:
 
 
 # ANTI-ALISING
-func display_get_antialiasing() -> int:
+func get_antialiasing() -> int:
 	var anti_aliasing: ANTI_ALIASING = SettingsFiles.get_setting("display", "anti_aliasing")
 	return anti_aliasing
 
 
-func display_set_antialiasing(mode: ANTI_ALIASING) -> void:
+func set_antialiasing(mode: ANTI_ALIASING) -> void:
 	var viewport: Viewport = get_viewport()
 
 	disable_anti_aliasing(viewport)
@@ -188,7 +191,7 @@ func display_set_antialiasing(mode: ANTI_ALIASING) -> void:
 		ANTI_ALIASING.FXAA:
 			viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
 		ANTI_ALIASING.MSAA:
-			var msaa_quality: int = Settings.display_get_msaa_quality()
+			var msaa_quality: int = Settings.get_msaa_quality()
 			match msaa_quality:
 				2:
 					viewport.msaa_3d = Viewport.MSAA_2X
@@ -210,12 +213,12 @@ func disable_anti_aliasing(viewport: Viewport) -> void:
 
 
 # MSAA
-func display_get_msaa_quality() -> int:
+func get_msaa_quality() -> int:
 	var msaa: int = SettingsFiles.get_setting("display", "msaa_quality")
 	return msaa
 
 
-func display_set_msaa_quality(index: int) -> void:
+func set_msaa_quality(index: int) -> void:
 	var viewport: Viewport = get_viewport()
 	match index:
 		0:
@@ -230,56 +233,56 @@ func display_set_msaa_quality(index: int) -> void:
 
 
 # UPSCALING
-func display_get_upscaler() -> Viewport.Scaling3DMode:
+func get_upscaler() -> Viewport.Scaling3DMode:
 	var upscaler: Viewport.Scaling3DMode = SettingsFiles.get_setting("display", "upscaler")
 	return upscaler
 
 
-func display_set_upscaler(mode: Viewport.Scaling3DMode) -> void:
+func set_upscaler(mode: Viewport.Scaling3DMode) -> void:
 	var viewport: Viewport = get_viewport()
 	match mode:
 		Viewport.SCALING_3D_MODE_BILINEAR:
 			viewport.scaling_3d_mode = mode
 		Viewport.SCALING_3D_MODE_FSR2:
 			viewport.scaling_3d_mode = mode
-			var quality: float = display_get_fsr_quality()
-			var sharpness: float = display_get_fsr_sharpness()
+			var quality: float = get_fsr_quality()
+			var sharpness: float = get_fsr_sharpness()
 			viewport.scaling_3d_scale = quality
 			viewport.fsr_sharpness = sharpness
 	SettingsFiles.apply_setting("display", "upscaler", mode)
 
 
 # FSR
-func display_get_fsr_quality() -> float:
+func get_fsr_quality() -> float:
 	var quality: float = SettingsFiles.get_setting("display", "fsr_quality")
 	return quality
 
 
-func display_set_fsr_quality(quality: float) -> void:
+func set_fsr_quality(quality: float) -> void:
 	var viewport: Viewport = get_viewport()
 	viewport.scaling_3d_scale = quality
 	SettingsFiles.apply_setting("display", "fsr_quality", quality)
 
 
-func display_get_fsr_sharpness() -> float:
+func get_fsr_sharpness() -> float:
 	var sharpness: float = SettingsFiles.get_setting("display", "fsr_sharpness")
 	return sharpness
 
 
 ## FSR Sharpness is a range of 0.0 to 2.0, with 0.0 being sharpest, 2.0 being least sharp.
-func display_set_fsr_sharpness(sharpness: float) -> void:
+func set_fsr_sharpness(sharpness: float) -> void:
 	var viewport: Viewport = get_viewport()
 	viewport.fsr_sharpness = sharpness
 	SettingsFiles.apply_setting("display", "fsr_sharpness", sharpness)
 
 
 # RENDER SCALE
-func display_get_render_scale() -> float:
+func get_render_scale() -> float:
 	var scale: float = SettingsFiles.get_setting("display", "render_scale")
 	return scale
 
 
-func display_set_render_scale(scale: float) -> void:
+func set_render_scale(scale: float) -> void:
 	var viewport: Viewport = get_viewport()
 	viewport.scaling_3d_scale = scale
 	SettingsFiles.apply_setting("display", "render_scale", scale)
@@ -287,11 +290,11 @@ func display_set_render_scale(scale: float) -> void:
 # ADJUSTMENTS
 
 # BRIGHTNESS
-func display_get_brightness() -> float:
+func get_brightness() -> float:
 	var brightness: float = SettingsFiles.get_setting("display", "brightness")
 	return brightness
 
-func display_set_brightness(brightness: float) -> void:
+func set_brightness(brightness: float) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.set_adjustment_brightness(brightness)
@@ -299,11 +302,11 @@ func display_set_brightness(brightness: float) -> void:
 
 
 # CONTRAST
-func display_get_contrast() -> float:
+func get_contrast() -> float:
 	var contrast: float = SettingsFiles.get_setting("display", "contrast")
 	return contrast
 
-func display_set_contrast(contrast: float) -> void:
+func set_contrast(contrast: float) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.set_adjustment_contrast(contrast)
@@ -311,11 +314,11 @@ func display_set_contrast(contrast: float) -> void:
 
 
 # SATURATION
-func display_get_saturation() -> float:
+func get_saturation() -> float:
 	var saturation: float = SettingsFiles.get_setting("display", "saturation")
 	return saturation
 
-func display_set_saturation(saturation: float) -> void:
+func set_saturation(saturation: float) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.set_adjustment_saturation(saturation)
@@ -324,87 +327,87 @@ func display_set_saturation(saturation: float) -> void:
 
 ## GRAPHICS
 # LOD THRESHOLD
-func graphics_get_lod_threshold() -> float:
-	var threshold: float = SettingsFiles.get_setting("graphics", "lod_threshold")
+func get_lod_threshold() -> float:
+	var threshold: float = SettingsFiles.get_setting("rendering", "lod_threshold")
 	return threshold
 
-func graphics_set_lod_threshold(threshold: float) -> void:
+func set_lod_threshold(threshold: float) -> void:
 	get_tree().root.mesh_lod_threshold = threshold
-	SettingsFiles.apply_setting("graphics", "lod_threshold", threshold)
+	SettingsFiles.apply_setting("rendering", "lod_threshold", threshold)
 
 
 # SCREEN-SPACE INDIRECT LIGHTING
-func graphics_get_ssil() -> bool:
-	var ssil: bool = SettingsFiles.get_setting("graphics", "ssil")
+func get_ssil() -> bool:
+	var ssil: bool = SettingsFiles.get_setting("rendering", "ssil")
 	return ssil
 
-func graphics_set_ssil(toggle: bool) -> void:
+func set_ssil(toggle: bool) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.ssil_enabled = toggle
-	SettingsFiles.apply_setting("graphics", "ssil", toggle)
+	SettingsFiles.apply_setting("rendering", "ssil", toggle)
 
 
-func graphics_get_ssil_quality() -> RenderingServer.EnvironmentSSILQuality:
-	var ssil_quality: RenderingServer.EnvironmentSSILQuality = SettingsFiles.get_setting("graphics", "ssil_quality")
+func get_ssil_quality() -> RenderingServer.EnvironmentSSILQuality:
+	var ssil_quality: RenderingServer.EnvironmentSSILQuality = SettingsFiles.get_setting("rendering", "ssil_quality")
 	return ssil_quality
 
-func graphics_set_ssil_quality(index: int) -> void:
+func set_ssil_quality(index: int) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		RenderingServer.environment_set_ssil_quality(index, true, 0.5, 4, 50, 300)
-	SettingsFiles.apply_setting("graphics", "ssil_quality", index)
+	SettingsFiles.apply_setting("rendering", "ssil_quality", index)
 
 
 # SCREEN-SPACE REFLECTIONS
-func graphics_get_ssr() -> bool:
-	var ssr: bool = SettingsFiles.get_setting("graphics", "ssr")
+func get_ssr() -> bool:
+	var ssr: bool = SettingsFiles.get_setting("rendering", "ssr")
 	return ssr
 
-func graphics_set_ssr(toggle: bool) -> void:
+func set_ssr(toggle: bool) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.set_ssr_enabled(toggle)
-	SettingsFiles.apply_setting("graphics", "ssr", toggle)
+	SettingsFiles.apply_setting("rendering", "ssr", toggle)
 
 
-func graphics_get_ssr_steps() -> int:
-	var steps: int = SettingsFiles.get_setting("graphics", "ssr_steps")
+func get_ssr_steps() -> int:
+	var steps: int = SettingsFiles.get_setting("rendering", "ssr_steps")
 	return steps
 
-func graphics_set_ssr_steps(steps: int) -> void:
+func set_ssr_steps(steps: int) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.ssr_max_steps = steps
-	SettingsFiles.apply_setting("graphics", "ssr_steps", steps)
+	SettingsFiles.apply_setting("rendering", "ssr_steps", steps)
 
 
 # SCREEN-SPACE AMBIENT OCCLUSION
-func graphics_get_ssao() -> bool:
-	var ssao: bool = SettingsFiles.get_setting("graphics", "ssao")
+func get_ssao() -> bool:
+	var ssao: bool = SettingsFiles.get_setting("rendering", "ssao")
 	return ssao
 
-func graphics_set_ssao(toggle: bool) -> void:
+func set_ssao(toggle: bool) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.ssao_enabled = toggle
-	SettingsFiles.apply_setting("graphics", "ssao", toggle)
+	SettingsFiles.apply_setting("rendering", "ssao", toggle)
 
-func graphics_get_ssao_quality() -> RenderingServer.EnvironmentSSAOQuality:
-	var ssao_quality: RenderingServer.EnvironmentSSAOQuality = SettingsFiles.get_setting("graphics", "ssao_quality")
+func get_ssao_quality() -> RenderingServer.EnvironmentSSAOQuality:
+	var ssao_quality: RenderingServer.EnvironmentSSAOQuality = SettingsFiles.get_setting("rendering", "ssao_quality")
 	return ssao_quality
 
-func graphics_set_ssao_quality(quality: RenderingServer.EnvironmentSSAOQuality) -> void:
+func set_ssao_quality(quality: RenderingServer.EnvironmentSSAOQuality) -> void:
 	RenderingServer.environment_set_ssao_quality(quality, true, 0.5, 2, 50, 300)
-	SettingsFiles.apply_setting("graphics", "ssao_quality", quality)
+	SettingsFiles.apply_setting("rendering", "ssao_quality", quality)
 
 
 # GLOBAL ILLUMINATION
-func graphics_get_gi() -> GI:
-	var gi: GI = SettingsFiles.get_setting("graphics", "gi")
+func get_gi() -> GI:
+	var gi: GI = SettingsFiles.get_setting("rendering", "gi")
 	return gi
 
-func graphics_set_gi(gi: GI) -> void:
+func set_gi(gi: GI) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		reset_gi()
@@ -414,7 +417,7 @@ func graphics_set_gi(gi: GI) -> void:
 			GI.SDFGI:
 				environment.sdfgi_enabled = true
 		
-	SettingsFiles.apply_setting("graphics", "gi", gi)
+	SettingsFiles.apply_setting("rendering", "gi", gi)
 
 func reset_gi() -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
@@ -422,120 +425,120 @@ func reset_gi() -> void:
 		environment.sdfgi_enabled = false
 	# TODO: Figure out a good way to fetch and toggle voxelGI
 
-func graphics_get_gi_resolution() -> bool:
-	var gi_res: bool = SettingsFiles.get_setting("graphics", "gi_half_res")
+func get_gi_resolution() -> bool:
+	var gi_res: bool = SettingsFiles.get_setting("rendering", "gi_half_res")
 	return gi_res
 
-func graphics_set_gi_resolution(index: int) -> void:
+func set_gi_resolution(index: int) -> void:
 	RenderingServer.gi_set_use_half_resolution(index == 1)
-	SettingsFiles.apply_setting("graphics", "gi_half_res", index == 1)
+	SettingsFiles.apply_setting("rendering", "gi_half_res", index == 1)
 
 # SDFGI
-func graphics_get_sdfgi_cascades() -> int:
-	var sdfgi_cascades: int = SettingsFiles.get_setting("graphics", "sdfgi_cascades")
+func get_sdfgi_cascades() -> int:
+	var sdfgi_cascades: int = SettingsFiles.get_setting("rendering", "sdfgi_cascades")
 	return sdfgi_cascades
 
 # Between 1 and 8
-func graphics_set_sdfgi_cascades(cascades: int) -> void:
+func set_sdfgi_cascades(cascades: int) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.sdfgi_cascades = cascades
-	SettingsFiles.apply_setting("graphics", "sdfgi_cascades", cascades)
+	SettingsFiles.apply_setting("rendering", "sdfgi_cascades", cascades)
 
-func graphics_get_sdfgi_rays() -> RenderingServer.EnvironmentSDFGIRayCount:
-	var rays: RenderingServer.EnvironmentSDFGIRayCount = SettingsFiles.get_setting("graphics", "sdfgi_rays")
+func get_sdfgi_rays() -> RenderingServer.EnvironmentSDFGIRayCount:
+	var rays: RenderingServer.EnvironmentSDFGIRayCount = SettingsFiles.get_setting("rendering", "sdfgi_rays")
 	return rays
 
-func graphics_set_sdfgi_rays(ray_count: RenderingServer.EnvironmentSDFGIRayCount) -> void:
+func set_sdfgi_rays(ray_count: RenderingServer.EnvironmentSDFGIRayCount) -> void:
 	RenderingServer.environment_set_sdfgi_ray_count(ray_count)
-	SettingsFiles.apply_setting("graphics", "sdfgi_rays", ray_count)
+	SettingsFiles.apply_setting("rendering", "sdfgi_rays", ray_count)
 
 # VOXEL GI
-func graphics_get_voxelgi_quality() -> RenderingServer.VoxelGIQuality:
-	var voxelgi_quality: RenderingServer.VoxelGIQuality = SettingsFiles.get_setting("graphics", "voxelgi_quality")
+func get_voxelgi_quality() -> RenderingServer.VoxelGIQuality:
+	var voxelgi_quality: RenderingServer.VoxelGIQuality = SettingsFiles.get_setting("rendering", "voxelgi_quality")
 	return voxelgi_quality
 
-func graphics_set_voxelgi_quality(quality: RenderingServer.VoxelGIQuality) -> void:
+func set_voxelgi_quality(quality: RenderingServer.VoxelGIQuality) -> void:
 	RenderingServer.voxel_gi_set_quality(quality)
-	SettingsFiles.apply_setting("graphics", "voxelgi_quality", quality)
+	SettingsFiles.apply_setting("rendering", "voxelgi_quality", quality)
 
 
 # VOLUMETRIC FOG
-func graphics_get_volumetric_fog() -> bool:
-	var volumetric_fog: bool = SettingsFiles.get_setting("graphics", "volumetric_fog")
+func get_volumetric_fog() -> bool:
+	var volumetric_fog: bool = SettingsFiles.get_setting("rendering", "volumetric_fog")
 	return volumetric_fog
 
-func graphics_set_volumetric_fog(toggle: bool) -> void:
+func set_volumetric_fog(toggle: bool) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.volumetric_fog_enabled = toggle
-	SettingsFiles.apply_setting("graphics", "volumetric_fog", toggle)
+	SettingsFiles.apply_setting("rendering", "volumetric_fog", toggle)
 
-func graphics_get_volumetric_fog_filtering() -> bool:
-	var filtering: bool = SettingsFiles.get_setting("graphics", "volumetric_fog_filtering")
+func get_volumetric_fog_filtering() -> bool:
+	var filtering: bool = SettingsFiles.get_setting("rendering", "volumetric_fog_filtering")
 	return filtering
 
-func graphics_set_volumetric_fog_filtering(toggle: bool) -> void:
+func set_volumetric_fog_filtering(toggle: bool) -> void:
 	RenderingServer.environment_set_volumetric_fog_filter_active(toggle)
-	SettingsFiles.apply_setting("graphics", "volumetric_fog_filtering", toggle)
+	SettingsFiles.apply_setting("rendering", "volumetric_fog_filtering", toggle)
 
 # SHADOWS
-func graphics_get_shadow_resolution_directional() -> int:
-	var res_directional: int = SettingsFiles.get_setting("graphics", "shadow_resolution_directional")
+func get_shadow_resolution_directional() -> int:
+	var res_directional: int = SettingsFiles.get_setting("rendering", "shadow_resolution_directional")
 	return res_directional
 
-func graphics_set_shadow_resolution_directional(resolution: int) -> void:
+func set_shadow_resolution_directional(resolution: int) -> void:
 	RenderingServer.directional_shadow_atlas_set_size(resolution, true)
-	SettingsFiles.apply_setting("graphics", "shadow_resolution_directional", resolution)
+	SettingsFiles.apply_setting("rendering", "shadow_resolution_directional", resolution)
 
-func graphics_get_shadow_resolution_positional() -> int:
-	var res_positional: int = SettingsFiles.get_setting("graphics", "shadow_resolution_positional")
+func get_shadow_resolution_positional() -> int:
+	var res_positional: int = SettingsFiles.get_setting("rendering", "shadow_resolution_positional")
 	return res_positional
 
-func graphics_set_shadow_resolution_positional(resolution: int) -> void:
+func set_shadow_resolution_positional(resolution: int) -> void:
 	get_viewport().positional_shadow_atlas_size = resolution
-	SettingsFiles.apply_setting("graphics", "shadow_resolution_positional", resolution)
+	SettingsFiles.apply_setting("rendering", "shadow_resolution_positional", resolution)
 
 
-func graphics_get_shadow_filtering_directional() -> RenderingServer.ShadowQuality:
-	var shadow_quality: RenderingServer.ShadowQuality = SettingsFiles.get_setting("graphics", "shadow_filtering_directional")
+func get_shadow_filtering_directional() -> RenderingServer.ShadowQuality:
+	var shadow_quality: RenderingServer.ShadowQuality = SettingsFiles.get_setting("rendering", "shadow_filtering_directional")
 	return shadow_quality
 
-func graphics_set_shadow_filtering_directional(quality: RenderingServer.ShadowQuality) -> void:
+func set_shadow_filtering_directional(quality: RenderingServer.ShadowQuality) -> void:
 	RenderingServer.directional_soft_shadow_filter_set_quality(quality)
-	SettingsFiles.apply_setting("graphics", "shadow_filtering_directional", quality)
+	SettingsFiles.apply_setting("rendering", "shadow_filtering_directional", quality)
 
 
-func graphics_get_shadow_filtering_positional() -> RenderingServer.ShadowQuality:
-	var shadow_quality: RenderingServer.ShadowQuality = SettingsFiles.get_setting("graphics", "shadow_filtering_positional")
+func get_shadow_filtering_positional() -> RenderingServer.ShadowQuality:
+	var shadow_quality: RenderingServer.ShadowQuality = SettingsFiles.get_setting("rendering", "shadow_filtering_positional")
 	return shadow_quality
 
-func graphics_set_shadow_filtering_positional(quality: RenderingServer.ShadowQuality) -> void:
+func set_shadow_filtering_positional(quality: RenderingServer.ShadowQuality) -> void:
 	RenderingServer.positional_soft_shadow_filter_set_quality(quality)
-	SettingsFiles.apply_setting("graphics", "shadow_filtering_positional", quality)
+	SettingsFiles.apply_setting("rendering", "shadow_filtering_positional", quality)
 
 
 # BLOOM
-func graphics_get_bloom() -> bool:
-	var bloom: bool = SettingsFiles.get_setting("graphics", "bloom")
+func get_bloom() -> bool:
+	var bloom: bool = SettingsFiles.get_setting("rendering", "bloom")
 	return bloom
 
-func graphics_set_bloom(bloom: bool) -> void:
+func set_bloom(bloom: bool) -> void:
 	var environment: Environment = get_viewport().get_world_3d().environment
 	if environment != null:
 		environment.glow_bloom = bloom
-	SettingsFiles.apply_setting("graphics", "bloom", bloom)
+	SettingsFiles.apply_setting("rendering", "bloom", bloom)
 
-func graphics_get_bloom_bicubic() -> bool:
-	var bicubic: bool = SettingsFiles.get_setting("graphics", "bloom_bicubic")
+func get_bloom_bicubic() -> bool:
+	var bicubic: bool = SettingsFiles.get_setting("rendering", "bloom_bicubic")
 	return bicubic
 
-func graphics_set_bloom_bicubic(bicubic: bool) -> void:
+func set_bloom_bicubic(bicubic: bool) -> void:
 	RenderingServer.environment_glow_set_use_bicubic_upscale(bicubic)
-	SettingsFiles.apply_setting("graphics", "bloom_bicubic", bicubic)
+	SettingsFiles.apply_setting("rendering", "bloom_bicubic", bicubic)
 
 ## Audio
-func audio_get_volume(bus_index: int) -> float:
+func get_volume(bus_index: int) -> float:
 	match bus_index:
 		0:
 			return SettingsFiles.get_setting("audio", "master_volume")
@@ -553,7 +556,7 @@ func audio_get_volume(bus_index: int) -> float:
 	return 1.0
 
 
-func audio_set_volume(index: int, volume: float) -> void:
+func set_volume(index: int, volume: float) -> void:
 	var adjusted_volume: float = volume
 	AudioServer.set_bus_volume_linear(index, adjusted_volume)
 	match index:
@@ -568,15 +571,15 @@ func audio_set_volume(index: int, volume: float) -> void:
 		4:
 			SettingsFiles.apply_setting("audio", "voice_volume", adjusted_volume)
 		5:
-			SettingsFiles.apply_setting("audio", "ui_volume", adjusted_volume)
+			SettingsFiles.apply_setting("audio", "volume", adjusted_volume)
 
 ## UI
 
-func ui_get_ui_scale() -> float:
+func get_ui_scale() -> float:
 	var scale: float = SettingsFiles.get_setting("ui", "scale")
 	return scale
 
-func ui_set_ui_scale(scale: float) -> void:
+func set_ui_scale(scale: float) -> void:
 	var new_size := viewport_start_size
 	new_size *= scale
 	get_tree().root.set_content_scale_size(new_size)

@@ -1,47 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://r3boq43ae4w"]
+[gd_scene format=3 uid="uid://r3boq43ae4w"]
 
 [ext_resource type="Script" uid="uid://l8vm2hnqotf0" path="res://settings_menu/components/adjustments.gd" id="1_5pcpq"]
 [ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="1_jjtvj"]
 
-[node name="Adjustments" type="GridContainer"]
+[node name="Adjustments" type="GridContainer" unique_id=825858293]
 editor_description = "Allows adjusting Brightness, Contrast and Saturation."
 theme_override_constants/v_separation = 8
 columns = 2
 script = ExtResource("1_5pcpq")
 
-[node name="BrightnessLabel" type="Label" parent="."]
+[node name="BrightnessLabel" type="Label" parent="." unique_id=1901867291]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Brightness"
 
-[node name="Brightness" parent="." instance=ExtResource("1_jjtvj")]
+[node name="Brightness" parent="." unique_id=1128848648 instance=ExtResource("1_jjtvj")]
 layout_mode = 2
-max_value = 2.0
+min_value = 0.5
+max_value = 1.5
 value = 1.0
 step = 0.1
 
-[node name="ContrastLabel" type="Label" parent="."]
+[node name="ContrastLabel" type="Label" parent="." unique_id=658703371]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Contrast"
 
-[node name="Contrast" parent="." instance=ExtResource("1_jjtvj")]
+[node name="Contrast" parent="." unique_id=644565113 instance=ExtResource("1_jjtvj")]
 layout_mode = 2
-max_value = 2.0
+min_value = 0.5
+max_value = 1.5
 value = 1.0
 step = 0.1
 
-[node name="SaturationLabel" type="Label" parent="."]
+[node name="SaturationLabel" type="Label" parent="." unique_id=2112893660]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Saturation"
 
-[node name="Saturation" parent="." instance=ExtResource("1_jjtvj")]
+[node name="Saturation" parent="." unique_id=560333954 instance=ExtResource("1_jjtvj")]
 layout_mode = 2
-max_value = 2.0
+min_value = 0.5
+max_value = 1.5
 value = 1.0
 step = 0.1
 

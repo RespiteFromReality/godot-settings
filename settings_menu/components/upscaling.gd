@@ -11,7 +11,7 @@ extends Control
 
 func _ready() -> void:
 	#UPSCALING
-	var upscaler: Viewport.Scaling3DMode = Settings.display_get_upscaler()
+	var upscaler: Viewport.Scaling3DMode = Settings.get_upscaler()
 	upscaling.set_block_signals(true)
 	match upscaler:
 		Viewport.SCALING_3D_MODE_BILINEAR: 
@@ -23,7 +23,7 @@ func _ready() -> void:
 	upscaling.set_block_signals(false)
 	
 	#FSR
-	var fsr_quality: float = Settings.display_get_fsr_quality()
+	var fsr_quality: float = Settings.get_fsr_quality()
 	fsr_quality_dropdown.set_block_signals(true)
 	var index: int = -1
 	match fsr_quality:
@@ -40,10 +40,10 @@ func _ready() -> void:
 	fsr_quality_dropdown.select(index)
 	fsr_quality_dropdown.set_block_signals(false)
 
-	var fsr_sharpness: float = Settings.display_get_fsr_sharpness()
+	var fsr_sharpness: float = Settings.get_fsr_sharpness()
 	fsr_sharpness_slider.set_value_no_signal(invert_sharpness(0, 2, fsr_sharpness))
 
-	var render_scale: float = Settings.display_get_render_scale()
+	var render_scale: float = Settings.get_render_scale()
 	render_scale_slider.set_value_no_signal(render_scale)
 
 
@@ -72,15 +72,15 @@ func toggle_upscaling_submenu(index: int) -> void:
 func _on_fsr_quality_dropdown_item_selected(index: int) -> void:
 	match index:
 		0:
-			Settings.display_set_fsr_quality(1.0)
+			Settings.set_fsr_quality(1.0)
 		1:
-			Settings.display_set_fsr_quality(0.77)
+			Settings.set_fsr_quality(0.77)
 		2:
-			Settings.display_set_fsr_quality(0.67)
+			Settings.set_fsr_quality(0.67)
 		3:
-			Settings.display_set_fsr_quality(0.59)
+			Settings.set_fsr_quality(0.59)
 		4:
-			Settings.display_set_fsr_quality(0.50)
+			Settings.set_fsr_quality(0.50)
 
 
 # FSR sharpening is an inverted range where 0 is sharpest and 2.0 is the least
@@ -88,18 +88,18 @@ func _on_fsr_quality_dropdown_item_selected(index: int) -> void:
 # for the engine.
 func _on_fsr_sharpness_slider_slider_value_changed(value: float) -> void:
 	var sharpness: float = invert_sharpness(0, 2, value)
-	Settings.display_set_fsr_sharpness(sharpness)
+	Settings.set_fsr_sharpness(sharpness)
 
 
 func _on_render_scale_slider_slider_value_changed(value: float) -> void:
-	Settings.display_set_render_scale(value)
+	Settings.set_render_scale(value)
 
 
 func _on_upscaling_item_selected(index: int) -> void:
 	toggle_upscaling_submenu(index)
 	match index:
 		0:
-			Settings.display_set_upscaler(Viewport.SCALING_3D_MODE_BILINEAR)
-			Settings.display_set_render_scale(render_scale_slider.get_value())
+			Settings.set_upscaler(Viewport.SCALING_3D_MODE_BILINEAR)
+			Settings.set_render_scale(render_scale_slider.get_value())
 		1:
-			Settings.display_set_upscaler(Viewport.SCALING_3D_MODE_FSR2)
+			Settings.set_upscaler(Viewport.SCALING_3D_MODE_FSR2)

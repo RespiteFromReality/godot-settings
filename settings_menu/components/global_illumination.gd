@@ -11,28 +11,28 @@ extends Control
 
 
 func _ready() -> void:
-	var gi: Settings.GI = Settings.graphics_get_gi()
+	var gi: Settings.GI = Settings.get_gi()
 	gi_options.set_block_signals(true)
 	gi_options.select(gi)
 	gi_options.set_block_signals(false)
 	toggle_submenu(gi)
 	
-	var gi_res: bool = Settings.graphics_get_gi_resolution()
+	var gi_res: bool = Settings.get_gi_resolution()
 	gi_resolution_option.set_block_signals(true)
 	match gi_res:
 		true: gi_resolution_option.select(0)
 		false: gi_resolution_option.select(1)
 	gi_resolution_option.set_block_signals(false)
 	
-	var sdfgi_cascades: int = Settings.graphics_get_sdfgi_cascades()
+	var sdfgi_cascades: int = Settings.get_sdfgi_cascades()
 	sdfgi_cascades_slider.set_value_no_signal(sdfgi_cascades)
 	
-	var rays: int = Settings.graphics_get_sdfgi_rays()
+	var rays: int = Settings.get_sdfgi_rays()
 	sdfgi_probe_rays_options.set_block_signals(true)
 	sdfgi_probe_rays_options.select(rays)
 	sdfgi_probe_rays_options.set_block_signals(false)
 	
-	var voxelgi_quality: int = Settings.graphics_get_voxelgi_quality()
+	var voxelgi_quality: int = Settings.get_voxelgi_quality()
 	voxel_gi_quality_options.set_block_signals(true)
 	voxel_gi_quality_options.select(voxelgi_quality)
 	voxel_gi_quality_options.set_block_signals(false)
@@ -49,19 +49,19 @@ func toggle_submenu(index: int) -> void:
 
 func _on_global_illumination_options_item_selected(index: int) -> void:
 	match index:
-		0: Settings.graphics_set_gi(Settings.GI.DISABLED)
-		1: Settings.graphics_set_gi(Settings.GI.VOXELGI)
-		2: Settings.graphics_set_gi(Settings.GI.SDFGI)
+		0: Settings.set_gi(Settings.GI.DISABLED)
+		1: Settings.set_gi(Settings.GI.VOXELGI)
+		2: Settings.set_gi(Settings.GI.SDFGI)
 	toggle_submenu(index)
 
 func _on_gi_resolution_option_item_selected(index: int) -> void:
-	Settings.graphics_set_gi_resolution(index != 1)
+	Settings.set_gi_resolution(index != 1)
 
 func _on_sdfgi_cascades_slider_slider_value_changed(cascades: int) -> void:
-	Settings.graphics_set_sdfgi_cascades(cascades)
+	Settings.set_sdfgi_cascades(cascades)
 
 func _on_sdfgi_probe_rays_options_item_selected(index: int) -> void:
-	Settings.graphics_set_sdfgi_rays(index)
+	Settings.set_sdfgi_rays(index)
 
 func _on_voxel_gi_quality_options_item_selected(index: int) -> void:
-	Settings.graphics_set_voxelgi_quality(index)
+	Settings.set_voxelgi_quality(index)

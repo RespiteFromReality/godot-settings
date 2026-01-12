@@ -14,6 +14,7 @@ config/name="Godot Settings"
 config/description="Godot 3D game settings demo."
 config/version="0.1.0"
 config/features=PackedStringArray("4.5", "Forward Plus")
+run/main_scene="uid://dd8pt6she48ej"
 boot_splash/show_image=false
 config/icon="uid://c54lq1y7tl7ts"
 

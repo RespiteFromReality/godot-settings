@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwtsjms3ni4ip"]
+[gd_scene format=3 uid="uid://bwtsjms3ni4ip"]
 
 [ext_resource type="Script" uid="uid://bu3k0afto2m8u" path="res://settings_menu/components/bloom.gd" id="1_l5ej3"]
 

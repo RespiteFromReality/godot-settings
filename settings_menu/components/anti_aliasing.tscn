@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://df1ws3gkkbapr"]
+[gd_scene format=3 uid="uid://df1ws3gkkbapr"]
 
 [ext_resource type="Script" uid="uid://c6832edpwlj5t" path="res://settings_menu/components/anti_aliasing.gd" id="1_kug44"]
 [ext_resource type="Texture2D" uid="uid://bmx4wa4da4alv" path="res://settings_menu/assets/NodeWarning.svg" id="2_44im6"]

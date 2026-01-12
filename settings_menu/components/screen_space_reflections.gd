@@ -6,13 +6,13 @@ extends Control
 
 
 func _ready() -> void:
-	var ssr: bool = Settings.graphics_get_ssr()
+	var ssr: bool = Settings.get_ssr()
 	ssr_options.set_block_signals(true)
 	ssr_options.select(int(ssr))
 	ssr_options.set_block_signals(false)
 	toggle_submenu(int(ssr))
 	
-	var ssr_steps: int = Settings.graphics_get_ssr_steps()
+	var ssr_steps: int = Settings.get_ssr_steps()
 	ssr_steps_slider.set_value_no_signal(ssr_steps)
 
 
@@ -22,8 +22,8 @@ func toggle_submenu(index: int) -> void:
 
 
 func _on_ssr_options_item_selected(index: int) -> void:
-	Settings.graphics_set_ssr(index == 1)
+	Settings.set_ssr(index == 1)
 	toggle_submenu(index)
 
 func _on_screen_space_reflections_quality_slider_slider_value_changed(value: int) -> void:
-	Settings.graphics_set_ssr_steps(value)
+	Settings.set_ssr_steps(value)

@@ -6,13 +6,13 @@ extends Control
 
 
 func _ready() -> void:
-	var ssil: bool = Settings.graphics_get_ssil()
+	var ssil: bool = Settings.get_ssil()
 	ssil_options.set_block_signals(true)
 	ssil_options.select(int(ssil))
 	ssil_options.set_block_signals(false)
 	toggle_ssil_submenu(int(ssil))
 	
-	var ssil_quality: RenderingServer.EnvironmentSSILQuality = Settings.graphics_get_ssil_quality()
+	var ssil_quality: RenderingServer.EnvironmentSSILQuality = Settings.get_ssil_quality()
 	ssil_quality_options.set_block_signals(true)
 	ssil_quality_options.select(ssil_quality)
 	ssil_quality_options.set_block_signals(false)
@@ -24,9 +24,9 @@ func toggle_ssil_submenu(index: int) -> void:
 
 
 func _on_ssil_options_item_selected(index: int) -> void:
-	Settings.graphics_set_ssil(index == 1)
+	Settings.set_ssil(index == 1)
 	toggle_ssil_submenu(index == 1)
 
 
 func _on_ssil_quality_options_item_selected(index: int) -> void:
-	Settings.graphics_set_ssil_quality(index)
+	Settings.set_ssil_quality(index)

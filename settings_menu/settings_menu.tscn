@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dd8pt6she48ej"]
+[gd_scene format=3 uid="uid://dd8pt6she48ej"]
 
 [ext_resource type="Theme" uid="uid://c2ecss6cotlob" path="res://settings_menu/theme.tres" id="1_vlimw"]
 [ext_resource type="PackedScene" uid="uid://cogtcpe66g1a7" path="res://settings_menu/components/fov.tscn" id="2_03olj"]
@@ -42,7 +42,7 @@ offset_bottom = 324.0
 [node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=1417397730]
 layout_mode = 2
 tab_alignment = 1
-current_tab = 4
+current_tab = 1
 
 [node name="Game" type="Control" parent="MarginContainer/TabContainer" unique_id=579158567]
 visible = false
@@ -70,7 +70,6 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="Display" type="Control" parent="MarginContainer/TabContainer" unique_id=2043272656]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -130,7 +129,7 @@ metadata/_tab_index = 2
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Graphics" unique_id=532899943]
 layout_mode = 0
 offset_right = 482.0
-offset_bottom = 601.0
+offset_bottom = 565.0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
@@ -221,6 +220,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="UI" type="Control" parent="MarginContainer/TabContainer" unique_id=446433427]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 

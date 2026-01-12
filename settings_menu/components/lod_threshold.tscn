@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1r0rlh6kci32"]
+[gd_scene format=3 uid="uid://d1r0rlh6kci32"]
 
 [ext_resource type="Script" uid="uid://sqwkycf4p0fb" path="res://settings_menu/components/lod_threshold.gd" id="1_laylt"]
 [ext_resource type="PackedScene" uid="uid://pva2tkjpsaxa" path="res://settings_menu/components/slider_with_value/slider_with_value.tscn" id="2_ujapk"]

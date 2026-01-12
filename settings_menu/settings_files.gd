@@ -1,90 +1,85 @@
 extends Node
 
 const SETTINGS_FILE_PATH = "user://settings.ini"
-const DEFAULT_SETTINGS_FILE_PATH = "user://settings_default.ini"
 
 var user_config: ConfigFile
 
-
 func _init() -> void:
-	user_config = ConfigFile.new()
-
-	# Create default settings file if first launch or they have been deleted.
-	if FileAccess.file_exists(DEFAULT_SETTINGS_FILE_PATH) == false:
-		create_defaults()
-
-	# Load user settings if they exist, otherwise clone default settings and create a `settings.ini`.
-	if FileAccess.file_exists(SETTINGS_FILE_PATH) == true:
-		var err: Error = user_config.load(SETTINGS_FILE_PATH)
-		if err != OK:
-			printerr("Loading settings failed with: ", err)
-	else:
-		user_config.load(DEFAULT_SETTINGS_FILE_PATH)
+	if FileAccess.file_exists(SETTINGS_FILE_PATH) == false:
+		user_config = create_default()
 		user_config.save(SETTINGS_FILE_PATH)
+	else:
+		user_config = ConfigFile.new()
+		var err: Error = user_config.load(SETTINGS_FILE_PATH)
+		assert(err == OK) # Just panic in debug.
+		if err != OK:
+			printerr("Failed to load config file with error: ", err)
+			printerr(err)
+			user_config = create_default()
 
 
 ## File Functions
-## Generates a ini file with default settings.
-func create_defaults() -> void:
-	var new_config := ConfigFile.new()
+## Generates a ConfigFile with default settings.
+func create_default() -> ConfigFile:
+	var default_config: ConfigFile = ConfigFile.new()
+	
+	default_config.set_value("config", "version", 1.0)
+	
+	default_config.set_value("game", "fov", 90)
+	
+	default_config.set_value("display", "window_mode", DisplayServer.WINDOW_MODE_WINDOWED)
+	default_config.set_value("display", "vsync_mode", DisplayServer.VSYNC_DISABLED)
+	default_config.set_value("display", "max_fps", 0)
+	
+	default_config.set_value("display", "anti_aliasing", Settings.ANTI_ALIASING.DISABLED)
+	default_config.set_value("display", "msaa_quality", 4)
 
-	new_config.set_value("config", "version", 1.0)
+	default_config.set_value("display", "upscaler", Viewport.SCALING_3D_MODE_BILINEAR)
+	default_config.set_value("display", "render_scale", 1.0)
+	default_config.set_value("display", "fsr_quality", 0.67)
+	default_config.set_value("display", "fsr_sharpness", 1.7)
 	
-	new_config.set_value("game", "fov", 90)
+	default_config.set_value("display", "brightness", 1.0)
+	default_config.set_value("display", "contrast", 1.0)
+	default_config.set_value("display", "saturation", 1.0)
 	
-	new_config.set_value("display", "window_mode", DisplayServer.WINDOW_MODE_WINDOWED)
-	new_config.set_value("display", "vsync_mode", DisplayServer.VSYNC_DISABLED)
-	new_config.set_value("display", "max_fps", 0)
+	default_config.set_value("rendering", "lod_threshold", 2.0)
+	default_config.set_value("rendering", "ssil", true)
+	default_config.set_value("rendering", "ssil_quality", RenderingServer.ENV_SSIL_QUALITY_HIGH)
 	
-	new_config.set_value("display", "anti_aliasing", Settings.ANTI_ALIASING.DISABLED)
-	new_config.set_value("display", "msaa_quality", 4)
-
-	new_config.set_value("display", "upscaler", Viewport.SCALING_3D_MODE_BILINEAR)
-	new_config.set_value("display", "render_scale", 1.0)
-	new_config.set_value("display", "fsr_quality", 0.67)
-	new_config.set_value("display", "fsr_sharpness", 1.7)
+	default_config.set_value("rendering", "ssr", true)
+	default_config.set_value("rendering", "ssr_steps", 32)
 	
-	new_config.set_value("display", "brightness", 1.0)
-	new_config.set_value("display", "contrast", 1.0)
-	new_config.set_value("display", "saturation", 1.0)
+	default_config.set_value("rendering", "ssao", true)
+	default_config.set_value("rendering", "ssao_quality", RenderingServer.ENV_SSAO_QUALITY_HIGH)
 	
-	new_config.set_value("graphics", "lod_threshold", 2.0)
-	new_config.set_value("graphics", "ssil", true)
-	new_config.set_value("graphics", "ssil_quality", RenderingServer.ENV_SSIL_QUALITY_HIGH)
+	default_config.set_value("rendering", "gi", Settings.GI.VOXELGI)
+	default_config.set_value("rendering", "gi_half_res", true)
+	default_config.set_value("rendering", "sdfgi_cascades", 4)
+	default_config.set_value("rendering", "sdfgi_rays", RenderingServer.EnvironmentSDFGIRayCount.ENV_SDFGI_RAY_COUNT_16)
+	default_config.set_value("rendering", "voxelgi_quality", RenderingServer.VOXEL_GI_QUALITY_LOW)
 	
-	new_config.set_value("graphics", "ssr", true)
-	new_config.set_value("graphics", "ssr_steps", 32)
+	default_config.set_value("rendering", "volumetric_fog", true)
+	default_config.set_value("rendering", "volumetric_fog_filtering", true)
 	
-	new_config.set_value("graphics", "ssao", true)
-	new_config.set_value("graphics", "ssao_quality", RenderingServer.ENV_SSAO_QUALITY_HIGH)
+	default_config.set_value("rendering", "shadow_resolution_positional", 1024)
+	default_config.set_value("rendering", "shadow_resolution_directional", 1024)
+	default_config.set_value("rendering", "shadow_filtering_positional", RenderingServer.ShadowQuality.SHADOW_QUALITY_SOFT_MEDIUM)
+	default_config.set_value("rendering", "shadow_filtering_directional", RenderingServer.ShadowQuality.SHADOW_QUALITY_SOFT_MEDIUM)
 	
-	new_config.set_value("graphics", "gi", Settings.GI.VOXELGI)
-	new_config.set_value("graphics", "gi_half_res", true)
-	new_config.set_value("graphics", "sdfgi_cascades", 4)
-	new_config.set_value("graphics", "sdfgi_rays", RenderingServer.EnvironmentSDFGIRayCount.ENV_SDFGI_RAY_COUNT_16)
-	new_config.set_value("graphics", "voxelgi_quality", RenderingServer.VOXEL_GI_QUALITY_LOW)
+	default_config.set_value("rendering", "bloom", true)
+	default_config.set_value("rendering", "bloom_bicubic", true)
 	
-	new_config.set_value("graphics", "volumetric_fog", true)
-	new_config.set_value("graphics", "volumetric_fog_filtering", true)
+	default_config.set_value("audio", "master_volume", 1.0)
+	default_config.set_value("audio", "music_volume", 1.0)
+	default_config.set_value("audio", "effects_volume", 1.0)
+	default_config.set_value("audio", "ambient_volume", 1.0)
+	default_config.set_value("audio", "voice_volume", 1.0)
+	default_config.set_value("audio", "ui_volume", 1.0)
 	
-	new_config.set_value("graphics", "shadow_resolution_positional", 1024)
-	new_config.set_value("graphics", "shadow_resolution_directional", 1024)
-	new_config.set_value("graphics", "shadow_filtering_positional", RenderingServer.ShadowQuality.SHADOW_QUALITY_SOFT_MEDIUM)
-	new_config.set_value("graphics", "shadow_filtering_directional", RenderingServer.ShadowQuality.SHADOW_QUALITY_SOFT_MEDIUM)
+	default_config.set_value("ui", "scale", 1.0)
 	
-	new_config.set_value("graphics", "bloom", true)
-	new_config.set_value("graphics", "bloom_bicubic", true)
-	
-	new_config.set_value("audio", "master_volume", 1.0)
-	new_config.set_value("audio", "music_volume", 1.0)
-	new_config.set_value("audio", "effects_volume", 1.0)
-	new_config.set_value("audio", "ambient_volume", 1.0)
-	new_config.set_value("audio", "voice_volume", 1.0)
-	new_config.set_value("audio", "ui_volume", 1.0)
-	
-	new_config.set_value("ui", "scale", 1.0)
-	
-	new_config.save(DEFAULT_SETTINGS_FILE_PATH)
+	return default_config
 
 
 func apply_setting(section: String, key: String, value: Variant) -> void:
@@ -97,25 +92,20 @@ func get_setting(section: String, key: String) -> Variant:
 		var value: Variant = user_config.get_value(section, key)
 		return value
 	else:
+		assert(false) # Just panic on this in debug.
 		return -1
 
 
 func save_settings() -> Error:
 	var err: Error = user_config.save(SETTINGS_FILE_PATH)
 	if err != OK:
+		assert(false) # Just panic in debug.
 		printerr("Saving settings failed with: ", err)
 
 	return err
 
 
-
 # Creates or loads `default_settings.ini` and overrides `settings.ini` with default values.
 func restore_default_settings() -> void:
-	var default_config := ConfigFile.new()
-
-	# Load default_settings.ini or create it if it missing.
-	if FileAccess.file_exists(DEFAULT_SETTINGS_FILE_PATH) == false:
-		create_defaults()
-
-	default_config.load(DEFAULT_SETTINGS_FILE_PATH)
+	var default_config: ConfigFile = create_default()
 	default_config.save(SETTINGS_FILE_PATH)

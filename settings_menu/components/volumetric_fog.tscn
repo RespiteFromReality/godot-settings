@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cm5yeengm2u3h"]
+[gd_scene format=3 uid="uid://cm5yeengm2u3h"]
 
 [ext_resource type="Script" uid="uid://b5x6w4qcay248" path="res://settings_menu/components/volumetric_fog.gd" id="1_81rr4"]
 

@@ -5,13 +5,13 @@ extends Control
 @onready var ssao_quality_options: OptionButton = $SSAOQualityOptions
 
 func _ready() -> void:
-	var ssao: bool = Settings.graphics_get_ssao()
+	var ssao: bool = Settings.get_ssao()
 	ssao_options.set_block_signals(true)
 	ssao_options.select(int(ssao))
 	ssao_options.set_block_signals(false)
 	toggle_submenu(int(ssao))
 	
-	var ssao_quality: RenderingServer.EnvironmentSSAOQuality = Settings.graphics_get_ssao_quality()
+	var ssao_quality: RenderingServer.EnvironmentSSAOQuality = Settings.get_ssao_quality()
 	ssao_quality_options.set_block_signals(true)
 	ssao_quality_options.select(ssao_quality)
 	ssao_quality_options.set_block_signals(false)
@@ -23,8 +23,8 @@ func toggle_submenu(index: int) -> void:
 
 
 func _on_ssao_options_item_selected(index: int) -> void:
-	Settings.graphics_set_ssao(index == 1)
+	Settings.set_ssao(index == 1)
 	toggle_submenu(index)
 
 func _on_ssao_quality_options_item_selected(index: int) -> void:
-	Settings.graphics_set_ssao_quality(index)
+	Settings.set_ssao_quality(index)
