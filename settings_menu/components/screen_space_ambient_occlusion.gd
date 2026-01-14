@@ -5,6 +5,11 @@ extends Control
 @onready var ssao_quality_options: OptionButton = $SSAOQualityOptions
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var ssao: bool = Settings.get_ssao()
 	ssao_options.set_block_signals(true)
 	ssao_options.select(int(ssao))

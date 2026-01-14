@@ -6,7 +6,12 @@ extends Control
 
 
 func _ready() -> void:
-	#AA
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
+		#AA
 	var anti_aliasing: int = Settings.get_antialiasing()
 	aa_option_button.set_block_signals(true)
 	aa_option_button.select(anti_aliasing)

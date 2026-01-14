@@ -6,6 +6,11 @@ extends Control
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var ssil: bool = Settings.get_ssil()
 	ssil_options.set_block_signals(true)
 	ssil_options.select(int(ssil))

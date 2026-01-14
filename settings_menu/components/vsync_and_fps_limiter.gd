@@ -9,12 +9,19 @@ const color_white = Color.WHITE
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var vsync_index: int = Settings.get_vsync_mode()
 	vsync.set_block_signals(true)
 	vsync.select(vsync_index)
 	vsync.set_block_signals(false)
 	if (vsync_index != 0):
 		toggle_fps_limiter(false)
+	else:
+		toggle_fps_limiter(true)
 
 	var max_fps: int = Settings.get_max_fps()
 	fps_limit_slider.set_block_signals(true)

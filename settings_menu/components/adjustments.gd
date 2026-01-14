@@ -6,6 +6,11 @@ extends Control
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var brightness: float = Settings.get_brightness()
 	brightness_slider.set_value_no_signal(brightness)
 	
@@ -14,7 +19,6 @@ func _ready() -> void:
 	
 	var saturation: float = Settings.get_saturation()
 	saturation_slider.set_value_no_signal(saturation)
-
 
 # Color Adjustments
 # these is a settings are attached to the environment.

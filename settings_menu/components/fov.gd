@@ -4,6 +4,11 @@ extends Control
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var fov: float = Settings.get_fov()
 	fov_slider.set_value_no_signal(fov)
 

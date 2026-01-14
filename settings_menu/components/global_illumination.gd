@@ -11,6 +11,11 @@ extends Control
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var gi: Settings.GI = Settings.get_gi()
 	gi_options.set_block_signals(true)
 	gi_options.select(gi)

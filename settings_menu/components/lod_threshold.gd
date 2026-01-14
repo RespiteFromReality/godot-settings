@@ -4,6 +4,11 @@ extends Control
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var threshold: float = Settings.get_lod_threshold()
 	threshold_slider.set_value_no_signal(threshold)
 

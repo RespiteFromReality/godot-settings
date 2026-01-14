@@ -17,6 +17,11 @@ var ui_index: int = AudioServer.get_bus_index("UI")
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var master_volume: float = Settings.get_volume(master_index)
 	var music_volume: float = Settings.get_volume(music_index)
 	var effects_volume: float = Settings.get_volume(effects_index)

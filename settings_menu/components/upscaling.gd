@@ -10,6 +10,11 @@ extends Control
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	#UPSCALING
 	var upscaler: Viewport.Scaling3DMode = Settings.get_upscaler()
 	upscaling.set_block_signals(true)

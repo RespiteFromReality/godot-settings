@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bdnli8g4ow2tm" path="res://settings_menu/components/screen_space_ambient_occlusion.tscn" id="11_r4dkt"]
 [ext_resource type="PackedScene" uid="uid://bwtsjms3ni4ip" path="res://settings_menu/components/bloom.tscn" id="14_pjsmy"]
 [ext_resource type="PackedScene" uid="uid://djgw7pir3pjol" path="res://settings_menu/components/ui_scaling.tscn" id="17_fhjgd"]
+[ext_resource type="Script" uid="uid://bsk3ojm4akmd5" path="res://settings_menu/restore_defaults.gd" id="18_pjsmy"]
 
 [node name="SettingsMenu" type="Control" unique_id=872930122]
 layout_mode = 3
@@ -37,7 +38,7 @@ offset_bottom = 324.0
 layout_mode = 0
 offset_top = -324.0
 offset_right = 498.0
-offset_bottom = 324.0
+offset_bottom = 285.0
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=1417397730]
 layout_mode = 2
@@ -243,3 +244,14 @@ size_flags_horizontal = 3
 
 [node name="UIScaling" parent="MarginContainer/TabContainer/UI/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1951421922 instance=ExtResource("17_fhjgd")]
 layout_mode = 2
+
+[node name="RestoreDefaultsButton" type="Button" parent="." unique_id=1459968807]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 285.0
+offset_right = 145.0
+offset_bottom = 316.0
+text = "Restore Defaults"
+script = ExtResource("18_pjsmy")
+
+[connection signal="pressed" from="RestoreDefaultsButton" to="RestoreDefaultsButton" method="_on_pressed"]

@@ -6,6 +6,8 @@ enum MSAA { x2, x4, x8 }
 enum GI { DISABLED, VOXELGI, SDFGI}
 enum SHADOW_RESOLUTION { x512, x1024, x2048, x4096, x8192 }
 
+signal reload_settings
+
 var viewport_start_size := Vector2(
 	ProjectSettings.get_setting(&"display/window/size/viewport_width"),
 	ProjectSettings.get_setting(&"display/window/size/viewport_height")
@@ -13,6 +15,12 @@ var viewport_start_size := Vector2(
 
 func _ready() -> void:
 	load_settings()
+
+
+func restore_defaults() -> void:
+	SettingsFiles.restore_default_settings()
+	load_settings()
+	reload_settings.emit()
 
 
 ## Loads user settings from config file.

@@ -6,6 +6,11 @@ extends Control
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var resolution: int = Settings.get_shadow_resolution_directional()
 	shadow_resolution_options.set_block_signals(true)
 	match resolution:

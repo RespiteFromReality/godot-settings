@@ -8,7 +8,12 @@ var viewport_start_size := Vector2(
 @onready var ui_scaling_options: OptionButton = $UIScalingOptions
 
 func _ready() -> void:
-	var ui_scale: float = Settings.get_ui_scale()	
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
+	var ui_scale: float = Settings.get_ui_scale()
 	ui_scaling_options.set_block_signals(true)
 	match ui_scale:
 		1.5: ui_scaling_options.select(0)

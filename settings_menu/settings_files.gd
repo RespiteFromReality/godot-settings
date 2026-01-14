@@ -84,7 +84,7 @@ func create_default() -> ConfigFile:
 
 func apply_setting(section: String, key: String, value: Variant) -> void:
 	user_config.set_value(section, key, value)
-	user_config.save(SETTINGS_FILE_PATH)
+	save_config(user_config)
 
 
 func get_setting(section: String, key: String) -> Variant:
@@ -96,8 +96,8 @@ func get_setting(section: String, key: String) -> Variant:
 		return -1
 
 
-func save_settings() -> Error:
-	var err: Error = user_config.save(SETTINGS_FILE_PATH)
+func save_config(config: ConfigFile) -> Error:
+	var err: Error = config.save(SETTINGS_FILE_PATH)
 	if err != OK:
 		assert(false) # Just panic in debug.
 		printerr("Saving settings failed with: ", err)
@@ -105,7 +105,6 @@ func save_settings() -> Error:
 	return err
 
 
-# Creates or loads `default_settings.ini` and overrides `settings.ini` with default values.
 func restore_default_settings() -> void:
-	var default_config: ConfigFile = create_default()
-	default_config.save(SETTINGS_FILE_PATH)
+	user_config = create_default()
+	save_config(user_config)

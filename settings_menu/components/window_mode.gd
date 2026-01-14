@@ -4,6 +4,11 @@ extends Control
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var mode: int = Settings.get_window_mode()
 	window_mode_button.set_block_signals(true)
 	match mode:

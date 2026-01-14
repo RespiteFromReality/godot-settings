@@ -4,6 +4,11 @@ extends Control
 
 
 func _ready() -> void:
+	initialize_settings()
+	Settings.reload_settings.connect(initialize_settings)
+
+
+func initialize_settings() -> void:
 	var bloom: bool = Settings.get_bloom()
 	var bicubic: bool = Settings.get_bloom_bicubic()
 	bloom_options.set_block_signals(true)
