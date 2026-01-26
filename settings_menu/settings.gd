@@ -134,6 +134,8 @@ func load_settings() -> void:
 	# UI SCALE
 	var scale: float = get_ui_scale()
 	set_ui_scale(scale)
+	
+	SettingsFiles.unsaved_changes = false
 
 
 # FOV

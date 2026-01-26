@@ -3,8 +3,15 @@ extends Node
 const SETTINGS_FILE_PATH = "user://settings.ini"
 
 var user_config: ConfigFile
+var unsaved_changes: bool
 
 func _init() -> void:
+	load_or_create_settings_file()
+
+
+## File Functions
+## Generates a ConfigFile with default settings.
+func load_or_create_settings_file() -> void:
 	if FileAccess.file_exists(SETTINGS_FILE_PATH) == false:
 		user_config = create_default()
 		user_config.save(SETTINGS_FILE_PATH)
@@ -13,13 +20,10 @@ func _init() -> void:
 		var err: Error = user_config.load(SETTINGS_FILE_PATH)
 		assert(err == OK) # Just panic in debug.
 		if err != OK:
-			printerr("Failed to load config file with error: ", err)
-			printerr(err)
+			printerr("Failed to load config file with error: %s" % error_string(err))
 			user_config = create_default()
 
 
-## File Functions
-## Generates a ConfigFile with default settings.
 func create_default() -> ConfigFile:
 	var default_config: ConfigFile = ConfigFile.new()
 	
@@ -84,7 +88,7 @@ func create_default() -> ConfigFile:
 
 func apply_setting(section: String, key: String, value: Variant) -> void:
 	user_config.set_value(section, key, value)
-	save_config(user_config)
+	unsaved_changes = true;
 
 
 func get_setting(section: String, key: String) -> Variant:
@@ -100,11 +104,12 @@ func save_config(config: ConfigFile) -> Error:
 	var err: Error = config.save(SETTINGS_FILE_PATH)
 	if err != OK:
 		assert(false) # Just panic in debug.
-		printerr("Saving settings failed with: ", err)
-
+		printerr("Saving settings failed with: %s" % error_string(err))
+	unsaved_changes = false
 	return err
 
 
 func restore_default_settings() -> void:
 	user_config = create_default()
 	save_config(user_config)
+	unsaved_changes = false
